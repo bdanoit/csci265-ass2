@@ -4,4 +4,6 @@
 actualOutput/
 actualOutput
 driver
-kwic
+*.gcov
+*.gcda
+*.gcno
