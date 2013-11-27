@@ -6,16 +6,17 @@
 
 #define NUMLINES 348
 #define MAXWORDS 11
-
+/*{5,"The","Cat","in","the","Hat"},
+	{4,"The","C","Programming","Language"},
+	{0},
+	{1,"xxx"},
+	{3,"","x","01234567890123456789012345678901234567890123456789"}
+*/
 struct {
 	int numWords;
 	char* wordList[MAXWORDS];
 } lineList[NUMLINES] = {
-	/*{5,"The","Cat","in","the","Hat"},
-	{4,"The","C","Programming","Language"},
-	{0},
-	{1,"xxx"},
-	{3,"","x","01234567890123456789012345678901234567890123456789"}*/{7,"Lorem","ipsum","dolor","sit","amet,","consectetur","adipiscing","elit."},
+{7,"Lorem","ipsum","dolor","sit","amet,","consectetur","adipiscing","elit."},
 {6,"Cras","eu","justo","vitae","ligula","tincidunt","porttitor."},
 {6,"Fusce","non","elit","eu","nibh","laoreet","lacinia."},
 {9,"Curabitur","lacinia","quam","eu","sapien","lobortis,","porttitor","interdum","tellus","commodo."},
@@ -362,7 +363,7 @@ struct {
 {6,"Vivamus","imperdiet","est","quis","ligula","venenatis","molestie."},
 {6,"Phasellus","dictum","nulla","et","felis","euismod","auctor."},
 {6,"Integer","imperdiet","felis","vel","purus","vestibulum","aliquam."},
-{9,"Fusce","suscipit","enim","vitae","elit","cursus,","id","pretium","sem","facilisis."},
+{9,"Fusce","suscipit","enim","vitae","elit","cursus,","id","pretium","sem","facilisis."}
 };
 
 static int errorCount = 0;
@@ -467,15 +468,15 @@ static void runTest()
 int main()
 {
 	LSInit();
+    
+    int i;
+    for(i = 0; i < 100; i++){
+	    printf("run the tests once\n");
+	    runTest();
 
-	printf("run the tests once\n");
-	runTest();
-
-	printf("check that LSReset runs without crashing\n");
-	LSReset();
-
-	printf("run the tests again\n");
-	runTest();
+	    printf("check that LSReset runs without crashing\n");
+	    LSReset();
+	}
 
 	if (errorCount == 0)
 		printf("\n\nNo errors detected!\n");

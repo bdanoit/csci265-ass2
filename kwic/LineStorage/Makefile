@@ -5,7 +5,7 @@ XCFLAGS = -I$(INC) ## extra C flags
 CC = gcc $(XCFLAGS)
 
 driver: driver.o LineStorage.o
-	$(CC) -o driver driver.o LineStorage.o
+	$(CC) -pg -o driver driver.o LineStorage.o
 
 runtest: driver
 	./driver
@@ -17,6 +17,11 @@ gcov: driver.o LineStorage.o
 	gcov LineStorage.c
 	rm -f list.o # gcov version is dangerous to leave around
 
+gprof: driver
+	./driver
+	gprof -b ./driver gmon.out
+
+
 export: LineStorage.o
 
 driver.o: $(INC)/kwic.h $(INC)/LineStorage.h driver.c
@@ -26,4 +31,4 @@ LineStorage.o: $(INC)/kwic.h $(INC)/LineStorage.h LineStorage.c
 	$(CC) -c $(CFLAGS) LineStorage.c
 
 clean:
-	rm -f *.o act/* driver *.gcov *.gcda *.gcno
+	rm -f *.o act/* driver *.gcov *.gcda *.gcno gmon.out
