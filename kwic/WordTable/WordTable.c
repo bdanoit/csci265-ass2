@@ -40,7 +40,7 @@ static char *getNextWord(FILE *fp)
 	do {
 		c = getc(fp);
 		if (c == EOF)
-			return NULL;
+			THROW(NULL);
 	} while(isspace(c));
 
 	/* read the noise word */
@@ -49,7 +49,7 @@ static char *getNextWord(FILE *fp)
 		result[len++] = c;
 		c = getc(fp);
 		if (c == EOF)
-			return NULL;
+			THROW(NULL);
 	} while(len < KWMAXNOISEWORD && !isspace(c));
 	result[len] = '\0';
 
@@ -57,14 +57,14 @@ static char *getNextWord(FILE *fp)
 	while(c != '\n') {
 		c = getc(fp);
 		if (c == EOF)
-			return NULL;
+			THROW(NULL);
 	}
 	return result;
 }
 
 /***** exported functions *****/
 
-KWStatus WTInit(char *noiseWdFileName)
+void WTInit(char *noiseWdFileName)
 {
 #define DFLTNUMNOISEWORDS	100
 	FILE *fp;
@@ -74,7 +74,7 @@ KWStatus WTInit(char *noiseWdFileName)
 	fp = fopen(noiseWdFileName,"r");	
 	if (fp == NULL) {
 		perror(noiseWdFileName);
-		return KWFILEERROR;
+		THROW(KWFILEERROR);
 	}
 
 	numWords = 0;
@@ -82,7 +82,7 @@ KWStatus WTInit(char *noiseWdFileName)
 	wordList = calloc(arrayLength,sizeof(char *));
 	if (wordList == NULL) {
 		fclose(fp);
-		return KWMEMORYERROR;
+		THROW(KWMEMORYERROR);
 	}
 
 	retCode = KWSUCCESS;
@@ -94,20 +94,19 @@ KWStatus WTInit(char *noiseWdFileName)
 			wordList = realloc(wordList,
 					arrayLength*sizeof(char*));
 			if (wordList == NULL) {
-				retCode = KWMEMORYERROR;
-				break;
+				fclose(fp);
+			   THROW(KWMEMORYERROR);
 			}
 		}
 		wordList[numWords] = malloc(strlen(newWord)+1);
 		if (wordList[numWords] == NULL) {
-			retCode = KWMEMORYERROR;
-			break;
+   		fclose(fp);
+			THROW(KWMEMORYERROR);
 		}
 		strcpy(wordList[numWords],newWord);
 		numWords++;
 	}
 	fclose(fp);
-	return retCode;
 #undef DFLTNUMNOISEWORDS
 }
 

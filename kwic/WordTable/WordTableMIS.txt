@@ -1,0 +1,90 @@
+
+==========================
+Documentation Type: MIS
+Last Updated: Nov 27, 2013
+Author: Daniel Deyaegher
+==========================
+
+Word Table MIS
+*****************
+The WordTable module reads a list of words from a file and allows the
+user to check whether a given word is in this list.
+
+
+Class Method getNextWord
+--------------------------
+Inputs: *fp = *noiseWdFileName from WTInit
+
+Exceptions: None
+
+Assumptions: input is correct data type
+             
+
+Behaviour:  if there is a 'noise word' remaining in fp then store
+         that word from in a static buffer and return its address.
+         Words longer than KWMAXNOISEWORD characters are truncated.
+         Otherwise,
+         return NULL
+            
+
+Outputs: result = the resulting noise word
+--------------------------
+
+
+
+Class Method WTInit
+--------------------------
+Inputs: nosieWdFileName = the filename for the noise word
+
+Exceptions: file could not open
+            wordList is NULL
+            wordList[numWords] is NULL
+                       
+
+Assumptions: input is correct data type
+
+Behaviour: initializes the noise word 
+
+Outputs: one of the following success/error messages defined in 
+         include/kwic.h:
+         
+         KWFILEERROR
+         KWMEMORYERROR
+         retCode = KWSUCCESS
+         retCode = KWMEMORYERROR
+--------------------------
+
+
+
+Class Method WTIsmember
+--------------------------
+Inputs: *s = pointer to the string to evaluate
+
+Exceptions: None
+
+Assumptions: input is correct data type
+
+Behaviour: Checks if the string at *s is in the wordList. Keeps
+            running until all the strings/words have been compared.
+
+Outputs: 1 if the input matches a string in the wordList.
+         0 if the input does not match a string in the wordList.
+--------------------------
+
+
+
+Class Method WTPrintState
+--------------------------
+Inputs: None
+
+Exceptions: None
+
+Assumptions: None
+
+Behaviour: Display to screen the words currently in the wordList.
+
+Outputs: None
+--------------------------
+
+
+tablength: 3 spaces
