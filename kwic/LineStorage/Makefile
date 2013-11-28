@@ -2,10 +2,10 @@ INC = ../include
 
 XCFLAGS = -I$(INC) ## extra C flags
 
-CC = gcc $(XCFLAGS)
+CC = gcc -pg -g $(XCFLAGS)
 
 driver: driver.o LineStorage.o
-	$(CC) -pg -o driver driver.o LineStorage.o
+	$(CC) -o driver driver.o LineStorage.o
 
 runtest: driver
 	./driver
