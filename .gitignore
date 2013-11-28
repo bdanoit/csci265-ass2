@@ -7,3 +7,4 @@ driver
 *.gcov
 *.gcda
 *.gcno
+gmon.out
