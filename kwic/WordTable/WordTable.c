@@ -85,7 +85,6 @@ void WTInit(char *noiseWdFileName)
 		THROW(KWMEMORYERROR);
 	}
 
-	retCode = KWSUCCESS;
 	for( ; ; ) {
 		newWord = getNextWord(fp);
 		if (newWord == NULL) break;

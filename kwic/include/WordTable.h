@@ -28,7 +28,7 @@ user to check whether a given word is in this list.
 * 		(a) contains one word per line
 * 		(b) is sorted in strictly ascending order
 */
-KWStatus WTInit(char *noiseWdFileName);
+void WTInit(char *noiseWdFileName);
 
 /*
 * Return true if s is one of the words stored and false otherwise,
