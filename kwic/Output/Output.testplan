@@ -1,3 +1,13 @@
+Output.c Testplan
+
+Use a skeleton of ShiftSort.c to force proper sorting of:
+	The C Programming Language
+	The Cat in the Hat
+
+
+
+Use diff to verify expected output of OUPrint is:
+
 The C Programming Language
     -
 The Cat in the Hat
@@ -16,3 +26,4 @@ The Cat in the Hat
         --
 The Cat in the Hat
            ---
+
