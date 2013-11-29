@@ -1,0 +1,39 @@
+
+===============================
+Documentation Type: MIS
+Last Updated: November 28, 2013
+Author: John Tribe
+===============================
+
+Output MIS
+**********
+
+Class Method OUInit
+-------------------
+Inputs: None
+
+Exceptions: None
+
+Assumptions: None
+
+Behaviour: None
+
+Outputs: None
+--------------------------
+
+
+Class Method OUPrint
+--------------------
+Inputs: None
+
+Exceptions: None
+
+Assumptions: 
+   ShiftSort has been executed successfully
+
+Behaviour: 
+   Rearranges lines provided by ShiftSort module to original configuration.
+
+Outputs: 
+   Prints lines to stdout with the keyword underlined
+-----------------------------
