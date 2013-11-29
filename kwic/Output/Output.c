@@ -49,13 +49,17 @@ void OUPrint(void)
 			{
 			        keyWordFound = 1;
 				const char *s;
-				for (s = curWord; *s; ++s);
-				keyWordLength += (s - curWord);  
+				for (s = curWord; *s; ++s)
+				{
+				}
+				keyWordLength = (s - curWord);  
 			}
 			else if(!keyWordFound)
 			{
 			        const char *s;
-			        for (s = curWord; *s; ++s);
+			        for (s = curWord; *s; ++s)
+				{
+				}
 			        keyWordIndex += (s - curWord)+1;  
 			}
 

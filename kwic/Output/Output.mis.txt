@@ -35,5 +35,5 @@ Behaviour:
    Rearranges lines provided by ShiftSort module to original configuration.
 
 Outputs: 
-   Prints lines to stdout with the keyword underlined
+   Prints lines to stdout with keywords underlined
 -----------------------------
