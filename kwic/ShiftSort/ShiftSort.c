@@ -5,6 +5,7 @@
 #include "kwic.h"
 #include "LineStorage.h"
 #include "ShiftSort.h"
+#include "Exceptions.h"
 
 /***** local constants *****/
 
@@ -91,24 +92,26 @@ void SSReset(void)
 
 KWStatus SSShiftSort(void)
 {
-        int i,j,k;
+      int i,j,k;
 
-        /* compute the size of lineList */
-        lineCount = 0;
-        for (i = 0; i < LSNumLines(); i++) {
-		for (j = 0; j < LSNumWords(i); j++) {
-			/* exclude lines that start with a noise word */
-			if (!WTIsMember(LSGetWord(i,j)))
-				lineCount++;
-		}
-        }
+      /* compute the size of lineList */
+      lineCount = 0;
+      for (i = 0; i < LSNumLines(); i++)
+      {
+		   for (j = 0; j < LSNumWords(i); j++)
+		   {
+			   /* exclude lines that start with a noise word */
+			   if (!WTIsMember(LSGetWord(i,j)))
+				   lineCount++;
+		   }
+      }
 
         /* allocate space for lineList */
-        lineList = calloc(lineCount, sizeof(LineList));
-        if (lineList == NULL) {
-		lineCount = 0;
-                return KWMEMORYERROR;
-	}
+      lineList = calloc(lineCount, sizeof(LineList));
+      if (lineList == NULL) {
+		   lineCount = 0;
+         THROW(KWMEMORYERROR);
+	   }
 
         /* fill lineList */
         k = 0;
@@ -134,25 +137,35 @@ const char* SSGetWord(int lineNum,int wordNum)
 {
         if (lineNum < 0 || lineNum >= lineCount || wordNum < 0 ||
 			wordNum >= LSNumWords(lineList[lineNum].lineNum))
-                return NULL;
-        else
-                return getWord(&lineList[lineNum],wordNum);
+			{
+                THROW(KWRANGEERROR);
+         }
+         else
+             return getWord(&lineList[lineNum],wordNum);
 }
 
 int SSNumWords(int lineNum)
 {
         if (lineNum < 0 || lineNum >= lineCount)
-                return(KWRANGEERROR);
+        {
+                THROW(KWRANGEERROR);
+        }
         else
+        {
                 return(LSNumWords(lineList[lineNum].lineNum));
+        }
 }
 
 int SSGetShiftNum(int lineNum)
 {
         if (lineNum < 0 || lineNum >= lineCount)
-                return(KWRANGEERROR);
+        {
+                THROW(KWRANGEERROR);
+        }
         else
+        {
                 return(lineList[lineNum].shiftNum);
+        }
 }
 
 int SSNumLines(void)
