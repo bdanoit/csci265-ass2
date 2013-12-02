@@ -1,0 +1,73 @@
+==========================
+Documentation Type: MIS
+Last Updated: Dec 2, 2013
+Author: Daniel Deyaegher
+==========================
+
+WordTable.MIS
+*****************
+
+
+Class Method getNextWord
+--------------------------
+Inputs: fp = name of the file to read from
+
+Exceptions: traversal hits end of file fp
+
+Assumptions: fp is properly passed in
+
+Behaviour: 
+   if there is a `noise word' remaining in fp then
+      Store that word from in a static buffer and return its address.
+      Words longer than KWMAXNOISEWORD characters are truncated.
+
+Outputs: result = address to noise word
+--------------------------
+
+
+Class Method WTInit
+--------------------------
+Inputs: noiseWdFileName
+
+Exceptions: file cannot open
+            cannot allocate wordList memory
+            
+            
+Assumptions: noiseWdFileName is properly passed in
+             nosieWdFileName exists
+
+Behaviour: Return true if s is one of the words stored and 
+           false otherwise, ignoring case.
+
+Outputs: <OUTPUT>
+--------------------------
+
+
+Class Method <METHOD NAME>
+--------------------------
+Inputs: <INPUT VARIABLES>
+
+Exceptions: <LIST OF EXCEPTIONS>
+
+Assumptions: <LIST OF ASSUMPTIONS>
+
+Behaviour: <SHORT DESCRIPTION OF NORMAL BEHAVIOUR>
+
+Outputs: <OUTPUT>
+--------------------------
+
+
+Class Method "METHOD NAME"
+--------------------------
+Inputs: <INPUT VARIABLES>
+
+Exceptions: <LIST OF EXCEPTIONS>
+
+Assumptions: <LIST OF ASSUMPTIONS>
+
+Behaviour: <SHORT DESCRIPTION OF NORMAL BEHAVIOUR>
+
+Outputs: <OUTPUT>
+--------------------------
+
+tablength: 3 spaces

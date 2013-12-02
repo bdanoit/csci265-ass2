@@ -67,7 +67,7 @@ KWStatus WTInit(char *noiseWdFileName)
 {
 #define DFLTNUMNOISEWORDS	100
 	FILE *fp;
-	int retCode,arrayLength;
+	int arrayLength;
 	char *newWord;
 
 	fp = fopen(noiseWdFileName,"r");	
@@ -84,7 +84,6 @@ KWStatus WTInit(char *noiseWdFileName)
 		THROW(KWMEMORYERROR);
 	}
 
-	retCode = KWSUCCESS;
 	for( ; ; ) {
 		newWord = getNextWord(fp);
 		if (newWord == NULL) break;
@@ -93,20 +92,19 @@ KWStatus WTInit(char *noiseWdFileName)
 			wordList = realloc(wordList,
 					arrayLength*sizeof(char*));
 			if (wordList == NULL) {
-				retCode = KWMEMORYERROR;
-				break;
+				fclose(fp);
+				THROW(KWMEMORYERROR);
 			}
 		}
 		wordList[numWords] = malloc(strlen(newWord)+1);
 		if (wordList[numWords] == NULL) {
-			retCode = KWMEMORYERROR;
-			break;
+			fclose(fp);
+			THROW(KWMEMORYERROR);
 		}
 		strcpy(wordList[numWords],newWord);
 		numWords++;
 	}
-	fclose(fp);
-	return retCode;
+	return KWSUCCESS;
 #undef DFLTNUMNOISEWORDS
 }
 
