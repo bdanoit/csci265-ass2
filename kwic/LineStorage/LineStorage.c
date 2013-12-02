@@ -90,6 +90,9 @@ void LSInit(void)
     LS->capacity = DefaultLineCapacity;
     LS->count = 0;
     LS->lines = (LineNode**)calloc(LS->capacity, sizeof(LineNode*));
+    if(LS->lines == NULL){
+        THROW(KWMEMORYERROR);
+    }
 }
 
 void LSReset(void)
@@ -109,6 +112,9 @@ void LSReset(void)
     LS->capacity = DefaultLineCapacity;
     LS->count = 0;
     LS->lines = (LineNode**)calloc(LS->capacity, sizeof(LineNode*));
+    if(LS->lines == NULL){
+        THROW(KWMEMORYERROR);
+    }
 }
 
 KWStatus LSAddLine(void)
@@ -122,11 +128,14 @@ KWStatus LSAddLine(void)
     newLine = calloc(1, sizeof(LineNode));
     if(newLine == NULL){
         //LineNode CALLOC FAILED
-		return KWMEMORYERROR;
+		THROW(KWMEMORYERROR);
     }
     newLine->capacity = DefaultWordCapacity;
     newLine->count = 0;
     newLine->words = (char**)calloc(newLine->capacity, sizeof(char*));
+    if(newLine->words == NULL){
+        THROW(KWMEMORYERROR);
+    }
     
 	/* REALLOCATE IF SIZE GREATER THAN CAPACITY */
     if(LS->capacity == LS->count){
@@ -139,7 +148,8 @@ KWStatus LSAddLine(void)
         }
         LS->lines = tmp;
     }
-    LS->lines[LS->count++] = newLine;
+    LS->lines[LS->count] = newLine;
+    LS->count++;
 	return KWSUCCESS;
 }
 
@@ -147,7 +157,7 @@ KWStatus LSAddWord(char* word)
 {
     
     if(LS->count == 0){
-        return KWRANGEERROR;
+        THROW(KWRANGEERROR);
     }
     
     /* GET CURRENT LineNode */
@@ -160,19 +170,20 @@ KWStatus LSAddWord(char* word)
         tmp = (char**)realloc(LN->words, LN->capacity * sizeof(char*));
         if(tmp == NULL){
             //LineNode REALLOC FAILED
-            return KWMEMORYERROR;
+            THROW(KWMEMORYERROR);
         }
         LN->words = tmp;
     }
     
     /* WORD NODE FOR STORING WORD */
     char* WN = malloc(strlen(word)+1);
-    if(!WN){
+    if(WN == NULL){
         //WordNode MALLOC FAILED
-        return KWMEMORYERROR;
+        THROW(KWMEMORYERROR);
     }
     strcpy(WN, word);
-    LN->words[LN->count++] = WN;
+    LN->words[LN->count] = WN;
+    LN->count++;
 	return KWSUCCESS;
 }
 
@@ -203,7 +214,7 @@ int LSNumWords(int lineNum)
 	/* find line lineNum */
 	LN = getLine(lineNum);
 	if (LN == NULL) {
-		return KWRANGEERROR;
+		THROW(KWRANGEERROR);
 	}
 	/* count the words in line lineNum */
 	return LN->count;

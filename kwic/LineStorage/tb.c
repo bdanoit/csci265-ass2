@@ -4,6 +4,8 @@
 #include "kwic.h"
 #include "LineStorage.h"
 
+include(CewDir/bin/cew.c)
+
 #define NUMLINES 348
 #define MAXWORDS 11
 /*{5,"The","Cat","in","the","Hat"},
@@ -373,15 +375,16 @@ static void runTest()
 	int i,j,status;
 	int rangeErr[4];
 	const char* word;
+	
+	cew_Variables
 
-	printf("check that LSAddWord properly signals KWRANGEERROR\n");
-	status = LSAddWord("");
-	if (status != KWRANGEERROR) {
-		printf("Error in LSAddWord return value.");
-		printf(" Actual: %d Expected: %d\n",status,KWRANGEERROR);
-		errorCount++;
-	}
-
+	//printf("check that LSAddWord properly signals KWRANGEERROR\n");
+	
+	//cew_Ecase(LSAddWord(""),KWRANGEERROR);
+	
+	cew_Summary
+	
+    /*
 	printf("load lineList into LineStorage\n");
 	for (i = 0; i < NUMLINES; i++) {
 		printf("\tline %d\n",i);
@@ -463,6 +466,7 @@ static void runTest()
 			errorCount++;
 		}
 	}
+	*/
 }
 
 int main()
