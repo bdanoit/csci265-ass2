@@ -6,8 +6,12 @@ Author: Daniel Deyaegher
 
 WordTable.MIS
 *****************
+State invariant:
+   1. wordList contains numWords pointers to null-terminated C strings.
+   2. wordList strings are sorted in ascending order.
 
 
+--------------------------
 Class Method getNextWord
 --------------------------
 Inputs: fp = name of the file to read from
@@ -24,50 +28,62 @@ Behaviour:
 Outputs: result = address to noise word
 --------------------------
 
-
+--------------------------
 Class Method WTInit
 --------------------------
 Inputs: noiseWdFileName
 
-Exceptions: file cannot open
+Exceptions: noiseWdFileName is unreadable
+            file cannot open
             cannot allocate wordList memory
             
             
 Assumptions: noiseWdFileName is properly passed in
              nosieWdFileName exists
+             The file specified by noiseWdFileName
+               (a) contains one word per line
+               (b) is sorted in strictly ascending order
 
 Behaviour: Return true if s is one of the words stored and 
-           false otherwise, ignoring case.
+           false otherwise, ignoring case. 
+           Words longer than 15 characters are truncated
 
-Outputs: <OUTPUT>
+Outputs: KWSUCCESS = 0
 --------------------------
 
-
-Class Method <METHOD NAME>
 --------------------------
-Inputs: <INPUT VARIABLES>
+Class Method WTIsMember
+--------------------------
+Inputs: s = pointer to char array
 
-Exceptions: <LIST OF EXCEPTIONS>
+Exceptions: s is less than wordList[mid]
+            s is greater than wordList[mid]
 
-Assumptions: <LIST OF ASSUMPTIONS>
+Assumptions: s is initialized properly
 
-Behaviour: <SHORT DESCRIPTION OF NORMAL BEHAVIOUR>
+Behaviour:  splits the wordList in half and compares s with each mid value.
+               if s is less than the mid, move the upper bound and recalculate.
+               if s is the same, word found and return 1.
+               else, s is greater so move the lower bound up and recalculate.
+            if traversal reaches the end of the list (low > high)
+               return 0
 
-Outputs: <OUTPUT>
+Outputs: 1 if word is found
+         0 if word is not found
 --------------------------
 
-
-Class Method "METHOD NAME"
 --------------------------
-Inputs: <INPUT VARIABLES>
+Class Method WTPrintState
+--------------------------
+Inputs: None
 
-Exceptions: <LIST OF EXCEPTIONS>
+Exceptions: None
 
-Assumptions: <LIST OF ASSUMPTIONS>
+Assumptions: wordList is initialized
 
-Behaviour: <SHORT DESCRIPTION OF NORMAL BEHAVIOUR>
+Behaviour: Print contents of wordList to screen.
 
-Outputs: <OUTPUT>
+Outputs: None
 --------------------------
 
 tablength: 3 spaces
