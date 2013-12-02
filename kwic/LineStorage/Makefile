@@ -4,15 +4,17 @@ XCFLAGS = -I$(INC) ## extra C flags
 
 CC = gcc -pg -g $(XCFLAGS)
 
+EXC = $(INC)/Exceptions.c $(INC)/Exceptions.h
+
 driver: driver.o LineStorage.o
-	$(CC) -o driver driver.o LineStorage.o
+	$(CC) -o driver driver.o LineStorage.o $(EXC)
 
 runtest: driver
 	./driver
 
 gcov: driver.o LineStorage.o
-	$(CC) -fprofile-arcs -ftest-coverage -c LineStorage.c
-	$(CC) -fprofile-arcs -ftest-coverage -o driver driver.o LineStorage.o
+	$(CC) -fprofile-arcs -ftest-coverage -c LineStorage.c $(EXC)
+	$(CC) -fprofile-arcs -ftest-coverage -o driver driver.o LineStorage.o $(EXC)
 	./driver
 	gcov LineStorage.c
 	rm -f list.o # gcov version is dangerous to leave around
@@ -25,10 +27,10 @@ gprof: driver
 export: LineStorage.o
 
 driver.o: $(INC)/kwic.h $(INC)/LineStorage.h driver.c
-	$(CC) -c $(CFLAGS) driver.c
+	$(CC) -c $(CFLAGS) driver.c $(EXC)
 
 LineStorage.o: $(INC)/kwic.h $(INC)/LineStorage.h LineStorage.c
-	$(CC) -c $(CFLAGS) LineStorage.c
+	$(CC) -c $(CFLAGS) LineStorage.c $(EXC)
 
 clean:
 	rm -f *.o act/* driver *.gcov *.gcda *.gcno gmon.out

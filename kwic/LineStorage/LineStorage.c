@@ -5,10 +5,11 @@
 #include <string.h>
 #include "kwic.h"
 #include "LineStorage.h"
+#include "Exceptions.h"
 
 /***** local constants *****/
 #define DefaultLineCapacity 8
-#define DefaultWordCapacity 4
+#define DefaultWordCapacity 10
 
 /***** local types *****/
 /*The LineStorage module stores a list of LineNodes*/
@@ -84,8 +85,7 @@ void LSInit(void)
 {
     LS = calloc(1, sizeof(LineStorage));
     if(LS == NULL){
-        printf("LSInit CALLOC FAILED\n");
-        return;
+        THROW(KWMEMORYERROR);
     }
     LS->capacity = DefaultLineCapacity;
     LS->count = 0;
