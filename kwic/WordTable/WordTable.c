@@ -33,7 +33,6 @@ static char** wordList;
 static char *getNextWord(FILE *fp)
 {
 	static char result[KWMAXNOISEWORD+1];
-	char *cp;
 	int c,len;
 
 	/* skip leading white space characters */
@@ -74,7 +73,7 @@ KWStatus WTInit(char *noiseWdFileName)
 	fp = fopen(noiseWdFileName,"r");	
 	if (fp == NULL) {
 		perror(noiseWdFileName);
-		return KWFILEERROR;
+		THROW(KWFILEERROR);
 	}
 
 	numWords = 0;
@@ -82,7 +81,7 @@ KWStatus WTInit(char *noiseWdFileName)
 	wordList = calloc(arrayLength,sizeof(char *));
 	if (wordList == NULL) {
 		fclose(fp);
-		return KWMEMORYERROR;
+		THROW(KWMEMORYERROR);
 	}
 
 	retCode = KWSUCCESS;
