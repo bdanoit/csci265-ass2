@@ -1,0 +1,65 @@
+/*
+==========================
+Documentation Type: Test Implemention
+Last Updated: Dec 2, 2013
+Author: Justin Waterhouse
+==========================
+*/
+
+#include <stdio.h>
+#include "kwic.h"
+#include "LineStorage.h"
+#include "WordTable.c"
+#include <string.h>
+#include <stdlib.h>
+
+// LOCAL VARIABLES
+char* inWordList[] = {
+	"a", "an", "and", "and/or", 
+	"as", "at", "for", "from", "in",
+	"of", "on", "or", "the", "to", "with",
+
+	/* upper case variations: */
+	"And", "aNd", "anD",
+
+	0 /* terminator */
+};
+
+char* notInWordList[] = {
+	/* words containing words in inWordList */
+	"thereupon", "into", "stool",
+
+	/* special strings */
+        "", " ", ",",
+
+	0 /* terminator */
+};
+
+include(CewDir/bin/cew.c)
+
+
+int main()
+{
+	cew_Variables
+	
+	WTInit("testNoiseWords");
+	// CEW N CASES
+
+	for (i = 0; inWordList[i]; i++) {
+	   // Check if words are in list
+	   cew_Ncase(,WTIsMember(inWordList[i]), KWSUCCESS, !=)
+   }
+   
+   for (i = 0; notInWordList[i]; i++ )
+   {
+      // Look for words not in the list
+	   cew_Ncase(,WTIsMember(notInWordList[i], KWSUCCESS, ==)
+   }
+   
+
+   cew_Ecase(WTInit("NotAFile"), KWFILEERROR)
+
+
+	cew_Summary
+	return 0;
+}
