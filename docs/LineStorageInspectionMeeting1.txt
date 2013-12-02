@@ -1,0 +1,123 @@
+=============================================
+Documentation Type: Inspection Meeting Report
+Last Updated: November 28, 2013
+Author: Baleze
+=============================================
+
+
+Inspection Meeting Report
+*************************
+
+File Name: LineStorage.c
+
+Attendance:
+Baleze - Author of inspected material
+Mandip
+Justin
+
+Is this a follow-up meeting: NO
+
+Requires follow-up meeting: YES
+
+Number of Requested Changes: 5
+
+Number of Suggested Changes: 2
+
+Number of Verified Changes: 0
+
+Additional Comments: NONE
+
+
+
+=================
+REQUESTED CHANGES
+=================
+
+Requested Change 1
+------------------
+Line Number: 11
+
+Change: Local constant default word capacity increased to 10
+
+Suggested By: Justin
+
+Approved By: Mandip
+
+To be Changed By: Baleze
+
+
+Requested Change 2
+------------------
+Line Number: 87
+
+Change: Throw exception
+
+Suggested By: Mandip
+
+Approved By: Justin
+
+To be Changed By: Baleze
+
+
+Requested Change 3
+------------------
+Line Number: 92,111,129
+
+Change: Check if pointer is NULL
+
+Suggested By: Baleze
+
+Approved By: Justin
+
+To be Changed By: Baleze
+
+
+Requested Change 4
+------------------
+Line Number: 142, 175
+
+Change: Split increment from assignment
+
+Suggested By: Mandip
+
+Approved By: Baleze
+
+To be Changed By: Baleze
+
+
+Requested Change 5
+------------------
+Line Number: 170
+
+Change: != to ==NULL
+
+Suggested By: Mandip
+
+Approved By: Baleze
+
+To be Changed By: Baleze
+
+
+
+=================
+SUGGESTED CHANGES
+=================
+
+Suggested Change 1
+------------------
+Line Number: 133, 158
+
+Reason for Change: Hardcode value ok
+
+Suggested By: Mandip
+
+
+Suggested Change 2
+------------------
+Line Number: 137
+
+Reason for Change: don’t need to free memory
+
+Suggested By: Justin
+
+
