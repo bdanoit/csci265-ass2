@@ -1,0 +1,91 @@
+=============================================
+Documentation Type: Inspection Meeting Report
+Last Updated: <DATE>
+Author: <YOUR NAME>
+=============================================
+
+
+Inspection Meeting Report
+*************************
+
+File Name:<FILENAME>
+
+Attendance:
+<NAME> - Author of inspected material
+<NAME>
+<NAME>
+
+Is this a follow-up meeting: <YES|NO>
+
+Requires follow-up meeting: <YES|NO>
+
+Number of Requested Changes: <NUMBER>
+
+Number of Suggested Changes: <NUMBER>
+
+Number of Verified Changes: <NUMBER>
+
+Additional Comments: <IF REQUIRED>
+
+
+
+=================
+REQUESTED CHANGES
+=================
+
+Requested Change 1
+------------------
+Line Number: 
+
+Reason for Change: 
+
+Suggested By: 
+
+Approved By: 
+
+To be Changed By: 
+
+
+Requested Change 2
+------------------
+Line Number: 
+
+Reason for Change: 
+
+Suggested By: 
+
+Approved By: 
+
+To be Changed By: 
+
+
+
+=================
+SUGGESTED CHANGES
+=================
+
+Suggested Change 1
+------------------
+Line Number: 
+
+Reason for Change: 
+
+Suggested By: 
+
+Approved By: 
+
+
+
+================
+VERIFIED CHANGES
+================
+
+Verified Change 1
+-----------------
+Requested Change Number: <NUMBER FROM PREVIOUS INSPECTION REPORT>
+
+Requested Change Occurred on: <DATE>
+
+Verified By:
+
+

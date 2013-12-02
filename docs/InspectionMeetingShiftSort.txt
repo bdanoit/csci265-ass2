@@ -1,0 +1,65 @@
+=============================================
+Documentation Type: Inspection Meeting Report
+Last Updated: Dec 2, 2013
+Author: Carsten Wurm
+=============================================
+
+
+Inspection Meeting Report
+*************************
+
+File Name: ShiftSort.c, ShiftSort.mis, ShiftSort.testplan
+
+Attendance:
+Mandip Sangha, Justin Waterhouse - Author of inspected material
+Carsten Wurm
+
+Is this a follow-up meeting: NO
+
+Requires follow-up meeting: NO
+
+Number of Requested Changes: 1
+
+Number of Suggested Changes: 1
+
+Number of Verified Changes: 0
+
+Additional Comments: Lines 112-113 can not be reasonably tested because depending on the system the case may or may not fail.
+
+
+=================
+REQUESTED CHANGES
+=================
+
+Requested Change 1
+------------------
+Line Number: N/A
+
+Requested Change: Reorder test cases in test plan
+
+Reason for Change:  Hard to find test case because they are not in order 
+
+Suggested By: Carsten Wurm
+
+Approved By: Justin Waterhouse
+
+To be Changed By: Mandip Sangha
+------------------
+
+
+=================
+SUGGESTED CHANGES
+=================
+
+Suggested Change 1
+------------------
+Line Number: N/A
+
+Suggested Change: In MIS change method SSGetWord, SSNumWords, SSGetShiftNum behaviour line to show behaviour of methods  
+
+Reason for no Change: Because there is no behaviour in the methods only output and exceptions
+
+Suggested By: Carsten Wurm
+
+Disapproved By: Mandip Sangha
+------------------

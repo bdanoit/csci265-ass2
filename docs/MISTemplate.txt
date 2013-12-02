@@ -1,0 +1,38 @@
+
+==========================
+Documentation Type: <TYPE>
+Last Updated: <DATE>
+Author: <YOUR NAME>
+==========================
+
+<MODULE NAME> MIS
+*****************
+
+Class Method <METHOD NAME>
+--------------------------
+Inputs: <INPUT VARIABLES>
+
+Exceptions: <LIST OF EXCEPTIONS>
+
+Assumptions: <LIST OF ASSUMPTIONS>
+
+Behaviour: <SHORT DESCRIPTION OF NORMAL BEHAVIOUR>
+
+Outputs: <OUTPUT>
+--------------------------
+
+
+Class Method "METHOD NAME"
+--------------------------
+Inputs: <INPUT VARIABLES>
+
+Exceptions: <LIST OF EXCEPTIONS>
+
+Assumptions: <LIST OF ASSUMPTIONS>
+
+Behaviour: <SHORT DESCRIPTION OF NORMAL BEHAVIOUR>
+
+Outputs: <OUTPUT>
+--------------------------
+
+tablength: 3 spaces
