@@ -9,21 +9,21 @@ ShiftSort TestPlan
 NCase
 +++++++++++++++++++++++
 
-	Case1:
+   Case1: 
+      Checks if SSShiftSort return KWSUCCESS when the method complete correctly 
+      
+	Case2:
 		Checks if SSNumLines return the right number of lines
 
-	Case2:
+	Case3:
 		Checks if SSNumWords return the right number of words for the 11 different lines
 	
-	Case3:
+	Case4:
 		Checks if SSGetShiftNum return the right number of shift numbers for the 11 different lines
 
-	Case4: 
+	Case5: 
 		Checks if SSGetWord return the right words in the 11 different lines 
 
-   Case5: 
-      Checks if SSShiftSort return KWSUCCESS when the method complete correctly 
-   
    Case6: 
       Checks if SSReset use then SSShiftSort return KWSUCCESS when the method complete correctly 
 
