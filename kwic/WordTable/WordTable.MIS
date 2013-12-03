@@ -44,9 +44,9 @@ Assumptions: noiseWdFileName is properly passed in
                (a) contains one word per line
                (b) is sorted in strictly ascending order
 
-Behaviour: Return true if s is one of the words stored and 
-           false otherwise, ignoring case. 
-           Words longer than 15 characters are truncated
+Behaviour:  Words in noiseWords are loaded into main memory
+            words longer than 15 characters are truncated to 15 characters
+            
 
 Outputs: KWSUCCESS = 0
 --------------------------
