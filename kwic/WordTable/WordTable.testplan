@@ -1,0 +1,22 @@
+==========================
+Documentation Type: Testplan
+Last Updated: Dec 2, 2013
+Author: Daniel Deyaegher
+==========================
+
+WordTable TestPlan
+
+NCase
++++++++++++++++++++++++
+
+   Case1: 
+      Checks if words are in the word list
+   Case2:
+      Looks for words not in the word list
+
+
+ECase
++++++++++++++++++++++++
+
+   Case1:
+      Try to open a file that does not exist

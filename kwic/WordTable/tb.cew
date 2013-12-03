@@ -63,12 +63,6 @@ int main()
 
    cew_Ecase(WTInit("NotAFile"), KWFILEERROR)
 
-   cew_Ecase(WTInit("NotAFile"), KWFILEERROR)
-
-   cew_Ecase(WTInit("NotAFile"), KWFILEERROR)   
-
-   cew_Ecase(WTInit("NotAFile"), KWFILEERROR)
-
 
 	cew_Summary
 	return 0;
