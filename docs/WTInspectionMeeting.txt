@@ -1,0 +1,76 @@
+=============================================
+Documentation Type: Inspection Meeting Report
+Last Updated: Dec 2, 2013
+Author: Danny
+=============================================
+
+
+Inspection Meeting Report
+*************************
+
+File Name: WordTable/WordTable.c WordTable/WordTable.testplan WordTable/tb.cew
+
+Attendance:
+Danny - Author of inspected material
+Justin
+Baleze
+
+Is this a follow-up meeting: NO
+
+Requires follow-up meeting: NO
+
+Number of Requested Changes: 0
+
+Number of Suggested Changes: 0
+
+Number of Verified Changes: 0
+
+Additional Comments:
+   Memory errors could not be reliably tested in tb.cew
+   EOF character could not be reliably tested in tb.cew
+
+
+
+=================
+REQUESTED CHANGES
+=================
+
+None
+
+
+
+=================
+SUGGESTED CHANGES
+=================
+
+Suggested Change 1
+------------------
+File: WordTable.c
+
+Line Number: 42, 51, 59
+
+Reason for Change: Incomplete line coverage
+
+Suggested By: Justin
+
+
+Suggested Change 2
+------------------
+File: WordTable.c
+
+Line Number: 85, 97, 103
+
+Reason for Change: Incomplete line coverage
+
+Suggested By: Baleze
+
+
+
+================
+VERIFIED CHANGES
+================
+
+N/A
+
+
+
