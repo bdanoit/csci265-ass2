@@ -3,27 +3,27 @@ Flat profile:
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  ms/call  ms/call  name    
- 36.42      0.04     0.04        1    40.06    73.36  OUPrint
- 27.31      0.07     0.03  2842832     0.00     0.00  getWord
- 18.21      0.09     0.02    69260     0.00     0.00  WTIsMember
-  9.10      0.10     0.01  6889233     0.00     0.00  LSNumWords
-  9.10      0.11     0.01  2912092     0.00     0.00  LSGetWord
-  0.00      0.11     0.00  9801325     0.00     0.00  getLine
-  0.00      0.11     0.00  1861842     0.00     0.00  SSGetWord
-  0.00      0.11     0.00  1244566     0.00     0.00  SSNumWords
-  0.00      0.11     0.00  1222758     0.00     0.00  SSGetShiftNum
-  0.00      0.11     0.00    34630     0.00     0.00  LSAddWord
-  0.00      0.11     0.00    21809     0.00     0.00  SSNumLines
-  0.00      0.11     0.00     3504     0.00     0.00  LSNumLines
-  0.00      0.11     0.00     1751     0.00     0.00  LSAddLine
-  0.00      0.11     0.00      347     0.00     0.00  getNextWord
-  0.00      0.11     0.00        1     0.00     0.00  INInit
-  0.00      0.11     0.00        1     0.00     0.00  INLoad
-  0.00      0.11     0.00        1     0.00     0.00  LSInit
-  0.00      0.11     0.00        1     0.00     0.00  OUInit
-  0.00      0.11     0.00        1     0.00     0.00  SSInit
-  0.00      0.11     0.00        1     0.00    20.37  SSShiftSort
-  0.00      0.11     0.00        1     0.00     0.00  WTInit
+ 22.25      0.02     0.02  2842832     0.00     0.00  getWord
+ 22.25      0.04     0.02        1    20.03    58.35  OUPrint
+ 16.69      0.06     0.02  2912092     0.00     0.00  LSGetWord
+ 11.13      0.07     0.01  9801325     0.00     0.00  getLine
+ 11.13      0.08     0.01    69260     0.00     0.00  WTIsMember
+  5.56      0.08     0.01  6889233     0.00     0.00  LSNumWords
+  5.56      0.09     0.01  1861842     0.00     0.00  SSGetWord
+  5.56      0.09     0.01        1     5.01    15.58  SSShiftSort
+  0.00      0.09     0.00  1244566     0.00     0.00  SSNumWords
+  0.00      0.09     0.00  1222758     0.00     0.00  SSGetShiftNum
+  0.00      0.09     0.00    34630     0.00     0.00  LSAddWord
+  0.00      0.09     0.00    21809     0.00     0.00  SSNumLines
+  0.00      0.09     0.00     3504     0.00     0.00  LSNumLines
+  0.00      0.09     0.00     1751     0.00     0.00  LSAddLine
+  0.00      0.09     0.00      347     0.00     0.00  getNextWord
+  0.00      0.09     0.00        1     0.00     0.00  INInit
+  0.00      0.09     0.00        1     0.00     0.00  INLoad
+  0.00      0.09     0.00        1     0.00     0.00  LSInit
+  0.00      0.09     0.00        1     0.00     0.00  OUInit
+  0.00      0.09     0.00        1     0.00     0.00  SSInit
+  0.00      0.09     0.00        1     0.00     0.00  WTInit
 
  %         the percentage of the total running time of the
 time       program used by this function.
@@ -55,13 +55,13 @@ name       the name of the function.  This is the minor sort
 		     Call graph (explanation follows)
 
 
-granularity: each sample hit covers 2 byte(s) for 9.08% of 0.11 seconds
+granularity: each sample hit covers 2 byte(s) for 11.10% of 0.09 seconds
 
 index % time    self  children    called     name
                                                  <spontaneous>
-[1]     85.1    0.00    0.09                 main [1]
-                0.04    0.03       1/1           OUPrint [2]
-                0.00    0.02       1/1           SSShiftSort [5]
+[1]     82.0    0.00    0.07                 main [1]
+                0.02    0.04       1/1           OUPrint [2]
+                0.01    0.01       1/1           SSShiftSort [7]
                 0.00    0.00       1/1           WTInit [23]
                 0.00    0.00       1/1           SSInit [22]
                 0.00    0.00       1/1           LSInit [20]
@@ -69,59 +69,59 @@ index % time    self  children    called     name
                 0.00    0.00       1/1           OUInit [21]
                 0.00    0.00       1/1           INLoad [19]
 -----------------------------------------------
-                0.04    0.03       1/1           main [1]
-[2]     66.6    0.04    0.03       1         OUPrint [2]
-                0.00    0.03 1861842/1861842     SSGetWord [4]
-                0.00    0.00 1244566/1244566     SSNumWords [10]
+                0.02    0.04       1/1           main [1]
+[2]     64.7    0.02    0.04       1         OUPrint [2]
+                0.01    0.03 1861842/1861842     SSGetWord [4]
+                0.00    0.00 1244566/1244566     SSNumWords [11]
                 0.00    0.00 1222758/1222758     SSGetShiftNum [12]
                 0.00    0.00   21809/21809       SSNumLines [14]
 -----------------------------------------------
-                0.01    0.00  980990/2842832     lineCompare [7]
-                0.02    0.01 1861842/2842832     SSGetWord [4]
-[3]     39.9    0.03    0.01 2842832         getWord [3]
-                0.01    0.00 2842832/2912092     LSGetWord [9]
+                0.01    0.01  980990/2842832     lineCompare [6]
+                0.01    0.01 1861842/2842832     SSGetWord [4]
+[3]     47.2    0.02    0.02 2842832         getWord [3]
+                0.01    0.00 2842832/2912092     LSGetWord [5]
                 0.00    0.00 2842832/6889233     LSNumWords [8]
 -----------------------------------------------
-                0.00    0.03 1861842/1861842     OUPrint [2]
-[4]     28.6    0.00    0.03 1861842         SSGetWord [4]
-                0.02    0.01 1861842/2842832     getWord [3]
+                0.01    0.03 1861842/1861842     OUPrint [2]
+[4]     40.1    0.01    0.03 1861842         SSGetWord [4]
+                0.01    0.01 1861842/2842832     getWord [3]
                 0.00    0.00 1861842/6889233     LSNumWords [8]
 -----------------------------------------------
-                0.00    0.02       1/1           main [1]
-[5]     18.5    0.00    0.02       1         SSShiftSort [5]
-                0.02    0.00   69260/69260       WTIsMember [6]
-                0.00    0.00   69260/2912092     LSGetWord [9]
+                0.00    0.00   69260/2912092     SSShiftSort [7]
+                0.01    0.00 2842832/2912092     getWord [3]
+[5]     20.0    0.02    0.00 2912092         LSGetWord [5]
+                0.00    0.00 2912092/9801325     getLine [9]
+-----------------------------------------------
+                                                 <spontaneous>
+[6]     18.0    0.00    0.02                 lineCompare [6]
+                0.01    0.01  980990/2842832     getWord [3]
+                0.00    0.00  867231/6889233     LSNumWords [8]
+-----------------------------------------------
+                0.01    0.01       1/1           main [1]
+[7]     17.3    0.01    0.01       1         SSShiftSort [7]
+                0.01    0.00   69260/69260       WTIsMember [10]
+                0.00    0.00   69260/2912092     LSGetWord [5]
                 0.00    0.00   72762/6889233     LSNumWords [8]
                 0.00    0.00    3504/3504        LSNumLines [15]
 -----------------------------------------------
-                0.02    0.00   69260/69260       SSShiftSort [5]
-[6]     18.2    0.02    0.00   69260         WTIsMember [6]
------------------------------------------------
-                                                 <spontaneous>
-[7]     14.9    0.00    0.02                 lineCompare [7]
-                0.01    0.00  980990/2842832     getWord [3]
-                0.00    0.00  867231/6889233     LSNumWords [8]
------------------------------------------------
-                0.00    0.00   72762/6889233     SSShiftSort [5]
-                0.00    0.00  867231/6889233     lineCompare [7]
-                0.00    0.00 1244566/6889233     SSNumWords [10]
+                0.00    0.00   72762/6889233     SSShiftSort [7]
+                0.00    0.00  867231/6889233     lineCompare [6]
+                0.00    0.00 1244566/6889233     SSNumWords [11]
                 0.00    0.00 1861842/6889233     SSGetWord [4]
                 0.00    0.00 2842832/6889233     getWord [3]
-[8]      9.1    0.01    0.00 6889233         LSNumWords [8]
-                0.00    0.00 6889233/9801325     getLine [11]
+[8]     13.4    0.01    0.01 6889233         LSNumWords [8]
+                0.01    0.00 6889233/9801325     getLine [9]
 -----------------------------------------------
-                0.00    0.00   69260/2912092     SSShiftSort [5]
-                0.01    0.00 2842832/2912092     getWord [3]
-[9]      9.1    0.01    0.00 2912092         LSGetWord [9]
-                0.00    0.00 2912092/9801325     getLine [11]
+                0.00    0.00 2912092/9801325     LSGetWord [5]
+                0.01    0.00 6889233/9801325     LSNumWords [8]
+[9]     11.1    0.01    0.00 9801325         getLine [9]
+-----------------------------------------------
+                0.01    0.00   69260/69260       SSShiftSort [7]
+[10]    11.1    0.01    0.00   69260         WTIsMember [10]
 -----------------------------------------------
                 0.00    0.00 1244566/1244566     OUPrint [2]
-[10]     1.6    0.00    0.00 1244566         SSNumWords [10]
+[11]     2.4    0.00    0.00 1244566         SSNumWords [11]
                 0.00    0.00 1244566/6889233     LSNumWords [8]
------------------------------------------------
-                0.00    0.00 2912092/9801325     LSGetWord [9]
-                0.00    0.00 6889233/9801325     LSNumWords [8]
-[11]     0.0    0.00    0.00 9801325         getLine [11]
 -----------------------------------------------
                 0.00    0.00 1222758/1222758     OUPrint [2]
 [12]     0.0    0.00    0.00 1222758         SSGetShiftNum [12]
@@ -132,7 +132,7 @@ index % time    self  children    called     name
                 0.00    0.00   21809/21809       OUPrint [2]
 [14]     0.0    0.00    0.00   21809         SSNumLines [14]
 -----------------------------------------------
-                0.00    0.00    3504/3504        SSShiftSort [5]
+                0.00    0.00    3504/3504        SSShiftSort [7]
 [15]     0.0    0.00    0.00    3504         LSNumLines [15]
 -----------------------------------------------
                 0.00    0.00    1751/1751        INLoad [19]
@@ -248,10 +248,10 @@ index % time    self  children    called     name
 
 Index by function name
 
-  [18] INInit                  [8] LSNumWords             [10] SSNumWords
-  [19] INLoad                 [21] OUInit                  [5] SSShiftSort
+  [18] INInit                  [8] LSNumWords             [11] SSNumWords
+  [19] INLoad                 [21] OUInit                  [7] SSShiftSort
   [16] LSAddLine               [2] OUPrint                [23] WTInit
-  [13] LSAddWord              [12] SSGetShiftNum           [6] WTIsMember
-   [9] LSGetWord               [4] SSGetWord              [11] getLine (LineStorage.c)
+  [13] LSAddWord              [12] SSGetShiftNum          [10] WTIsMember
+   [5] LSGetWord               [4] SSGetWord               [9] getLine (LineStorage.c)
   [20] LSInit                 [22] SSInit                 [17] getNextWord
   [15] LSNumLines             [14] SSNumLines              [3] getWord
