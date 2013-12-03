@@ -1,0 +1,26 @@
+
+===============================
+Documentation Type: Testplan
+Last Updated: November 28, 2013
+Author: John Tribe
+===============================
+
+System Test Plan
+
+Module Testing
+++++++++++++++++++
+	Visit each module and preform the Makefile runtest.
+
+CS1 Testing
+++++++++++++++++++
+	Use Makefile to execute KWIC with different noise word files and input files. Then call diff and the actual output and the expected output.
+	
+	Test 1: Input from stdin
+	Test 2: Command line argument
+	Test 3: 2 input files from command line argument
+	Test 4: Use default noisewords
+	Test 5: Use a specified noisewords file
+	Test 6: Use environment variables to specifiy noisewords file
+	
+	
+
