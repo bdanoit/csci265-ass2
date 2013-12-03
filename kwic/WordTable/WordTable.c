@@ -26,87 +26,86 @@ static char** wordList;
 /***** local functions *****/
 
 /* if there is a `noise word' remaining in fp then
-*	Store that word from in a static buffer and return its address.
-*	Words longer than KWMAXNOISEWORD characters are truncated.
+*        Store that word from in a static buffer and return its address.
+*        Words longer than KWMAXNOISEWORD characters are truncated.
 * else
-*	Return NULL
+*        Return NULL
 */
 static char *getNextWord(FILE *fp)
 {
-	static char result[KWMAXNOISEWORD+1];
-	int c,len;
+        static char result[KWMAXNOISEWORD+1];
+        int c,len;
 
-	/* skip leading white space characters */
-	do {
-		c = getc(fp);
-		if (c == EOF)
-			THROW(NULL);
-	} while(isspace(c));
+        /* skip leading white space characters */
+        do {
+                c = getc(fp);
+                if (c == EOF)
+                        return NULL;
+        } while(isspace(c));
 
-	/* read the noise word */
-	len = 0;
-	do {
-		result[len++] = c;
-		c = getc(fp);
-		if (c == EOF)
-			THROW(NULL);
-	} while(len < KWMAXNOISEWORD && !isspace(c));
-	result[len] = '\0';
+        /* read the noise word */
+        len = 0;
+        do {
+                result[len++] = c;
+                c = getc(fp);
+                if (c == EOF)
+                        return NULL;
+        } while(len < KWMAXNOISEWORD && !isspace(c));
+        result[len] = '\0';
 
-	/* skip trailing junk on the line */
-	while(c != '\n') {
-		c = getc(fp);
-		if (c == EOF)
-			THROW(NULL);
-	}
-	return result;
+        /* skip trailing junk on the line */
+        while(c != '\n') {
+                c = getc(fp);
+                if (c == EOF)
+                        return NULL;
+        }
+        return result;
 }
 
 /***** exported functions *****/
 
-void WTInit(char *noiseWdFileName)
+KWStatus WTInit(char *noiseWdFileName)
 {
-#define DFLTNUMNOISEWORDS	100
-	FILE *fp;
-	int arrayLength;
-	char *newWord;
+#define DFLTNUMNOISEWORDS        100
+        FILE *fp;
+        int arrayLength;
+        char *newWord;
 
-	fp = fopen(noiseWdFileName,"r");	
-	if (fp == NULL) {
-		perror(noiseWdFileName);
-		THROW(KWFILEERROR);
-	}
+        fp = fopen(noiseWdFileName,"r");        
+        if (fp == NULL) {
+                perror(noiseWdFileName);
+                THROW(KWFILEERROR);
+        }
 
-	numWords = 0;
-	arrayLength = DFLTNUMNOISEWORDS;
-	wordList = calloc(arrayLength,sizeof(char *));
-	if (wordList == NULL) {
-		fclose(fp);
-		THROW(KWMEMORYERROR);
-	}
+        numWords = 0;
+        arrayLength = DFLTNUMNOISEWORDS;
+        wordList = calloc(arrayLength,sizeof(char *));
+        if (wordList == NULL) {
+                fclose(fp);
+                THROW(KWMEMORYERROR);
+        }
 
-	for( ; ; ) {
-		newWord = getNextWord(fp);
-		if (newWord == NULL) break;
-		if (numWords >= arrayLength) {
-			arrayLength *= 2;
-			wordList = realloc(wordList,
-					arrayLength*sizeof(char*));
-			if (wordList == NULL) {
-				fclose(fp);
+        for( ; ; ) {
+                newWord = getNextWord(fp);
+                if (newWord == NULL) break;
+                if (numWords >= arrayLength) {
+                        arrayLength *= 2;
+                        wordList = realloc(wordList,
+                                        arrayLength*sizeof(char*));
+                        if (wordList == NULL) {
+                                fclose(fp);
                                 THROW(KWMEMORYERROR);
-			}
-		}
-		wordList[numWords] = malloc(strlen(newWord)+1);
-		if (wordList[numWords] == NULL) {
-			fclose(fp);
-			THROW(KWMEMORYERROR);
-		}
-		strcpy(wordList[numWords],newWord);
-		numWords++;
-	}
-	fclose(fp);
-	return KWSUCCESS;
+                        }
+                }
+                wordList[numWords] = malloc(strlen(newWord)+1);
+                if (wordList[numWords] == NULL) {
+                        fclose(fp);
+                        THROW(KWMEMORYERROR);
+                }
+                strcpy(wordList[numWords],newWord);
+                numWords++;
+        }
+        return KWSUCCESS;
 #undef DFLTNUMNOISEWORDS
 }
 
@@ -114,8 +113,8 @@ int WTIsMember(char* s)
 {
         int high,low,mid,cmpVal;
 
-	low = 0;
-	high = numWords - 1;
+        low = 0;
+        high = numWords - 1;
         while (low <= high) {
                 mid = (low+high)/2;
                 cmpVal = strcasecmp(s,wordList[mid]);
@@ -132,7 +131,7 @@ int WTIsMember(char* s)
 void WTPrintState(void)
 {
         int i;
-	printf("\tnumWords: %d\n",numWords);
+        printf("\tnumWords: %d\n",numWords);
         for (i = 0; i < numWords; i++)
                 printf("\t%s\n",wordList[i]);
 }
