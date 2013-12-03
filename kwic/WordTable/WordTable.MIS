@@ -11,7 +11,6 @@ State invariant:
    2. wordList strings are sorted in ascending order.
 
 
---------------------------
 Class Method getNextWord
 --------------------------
 Inputs: fp = name of the file to read from
@@ -28,7 +27,7 @@ Behaviour:
 Outputs: result = address to noise word
 --------------------------
 
---------------------------
+
 Class Method WTInit
 --------------------------
 Inputs: noiseWdFileName
@@ -51,7 +50,7 @@ Behaviour:  Words in noiseWords are loaded into main memory
 Outputs: KWSUCCESS = 0
 --------------------------
 
---------------------------
+
 Class Method WTIsMember
 --------------------------
 Inputs: s = pointer to char array
@@ -72,7 +71,7 @@ Outputs: 1 if word is found
          0 if word is not found
 --------------------------
 
---------------------------
+
 Class Method WTPrintState
 --------------------------
 Inputs: None
