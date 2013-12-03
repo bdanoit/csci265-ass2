@@ -1,91 +1,33 @@
 =============================================
 Documentation Type: Inspection Meeting Report
-Last Updated: <DATE>
-Author: <YOUR NAME>
+Last Updated: Dec 2, 2013
+Author: Carsten
 =============================================
 
 
 Inspection Meeting Report
 *************************
 
-File Name:<FILENAME>
+File Name:Input.mis
 
 Attendance:
-<NAME> - Author of inspected material
-<NAME>
-<NAME>
+Carsten - Author of inspected material
+John
+Mandip
 
-Is this a follow-up meeting: <YES|NO>
+Is this a follow-up meeting: NO
 
-Requires follow-up meeting: <YES|NO>
+Requires follow-up meeting: NO
 
-Number of Requested Changes: <NUMBER>
+Number of Requested Changes: 0
 
-Number of Suggested Changes: <NUMBER>
+Number of Suggested Changes: 0
 
-Number of Verified Changes: <NUMBER>
+Number of Verified Changes: 0
 
-Additional Comments: <IF REQUIRED>
-
-
-
-=================
-REQUESTED CHANGES
-=================
-
-Requested Change 1
-------------------
-Line Number: 
-
-Reason for Change: 
-
-Suggested By: 
-
-Approved By: 
-
-To be Changed By: 
-
-
-Requested Change 2
-------------------
-Line Number: 
-
-Reason for Change: 
-
-Suggested By: 
-
-Approved By: 
-
-To be Changed By: 
+Additional Comments: Not cew tested because Input is unique from other modules
 
 
 
-=================
-SUGGESTED CHANGES
-=================
-
-Suggested Change 1
-------------------
-Line Number: 
-
-Reason for Change: 
-
-Suggested By: 
-
-Approved By: 
-
-
-
-================
-VERIFIED CHANGES
-================
-
-Verified Change 1
------------------
-Requested Change Number: <NUMBER FROM PREVIOUS INSPECTION REPORT>
-
-Requested Change Occurred on: <DATE>
-
-Verified By:
 
 
