@@ -1,0 +1,44 @@
+==========================
+Documentation Type: Testplan
+Last Updated: Dec 2, 2013
+Author: Mandip Sangha, Justin Waterhouse
+==========================
+
+ShiftSort TestPlan
+
+NCase
++++++++++++++++++++++++
+
+   Case1: 
+      Checks if SSShiftSort return KWSUCCESS when the method complete correctly 
+      
+	Case2:
+		Checks if SSNumLines return the right number of lines
+
+	Case3:
+		Checks if SSNumWords return the right number of words for the 11 different lines
+	
+	Case4:
+		Checks if SSGetShiftNum return the right number of shift numbers for the 11 different lines
+
+	Case5: 
+		Checks if SSGetWord return the right words in the 11 different lines 
+
+   Case6: 
+      Checks if SSReset use then SSShiftSort return KWSUCCESS when the method complete correctly 
+
+ECase
++++++++++++++++++++++++
+
+	Case1:
+		Make sure when SSGetWord lineNum out of range it throws an exception
+	
+	Case2:
+		Make sure when SSNumWords lineNum out of range it throws an exception
+
+	Case3:
+		Make sure when SSGetShiftNum lineNum out of range it throws an exception
+
+	Case4:
+		Make sure when SSGetWord numWords out of range it throws an exception
+   

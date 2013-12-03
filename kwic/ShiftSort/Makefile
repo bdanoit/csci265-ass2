@@ -2,25 +2,41 @@ INC = ../include
 
 XCFLAGS = -I$(INC) ## extra C flags
 
+SD=../../CewDir
+
+
+INDENT=cat
+
 CC = gcc $(XCFLAGS)
 
-driver: driver.o ShiftSort.o LineStorage.o WordTable.o
-	$(CC) -o driver driver.o ShiftSort.o LineStorage.o WordTable.o
 
-runtest: driver
-	./driver
+bats: tb.o ShiftSort.o LineStorage.o WordTable.o Exceptions.o
+	$(CC) -o tb tb.o ShiftSort.o LineStorage.o WordTable.o Exceptions.o
 
-gcov: driver.o ShiftSort.o LineStorage.o WordTable.o
+tb.c :  tb.cew
+	rm -f $(SD)/tmp/tb.num
+	rm -f ./tb.c
+	awk -f $(SD)/bin/addLineNums.awk tb.cew > $(SD)/tmp/tb.num
+	m4 -B20000 $(SD)/tmp/tb.num | $(INDENT) > tb.c
+
+
+runtest: tb
+	./tb
+
+gcov: tb.o ShiftSort.o LineStorage.o WordTable.o Exceptions.o
 	$(CC) -fprofile-arcs -ftest-coverage -c ShiftSort.c
-	$(CC) -fprofile-arcs -ftest-coverage -o driver driver.o ShiftSort.o LineStorage.o WordTable.o
-	./driver
+	$(CC) -fprofile-arcs -ftest-coverage -o tb tb.o ShiftSort.o LineStorage.o WordTable.o Exceptions.o
+	./tb
 	gcov ShiftSort.c
 	rm -f list.o # gcov version is dangerous to leave around
 
 export: ShiftSort.o
 
-driver.o: $(INC)/kwic.h $(INC)/ShiftSort.h
-	$(CC) -c $(CFLAGS) driver.c
+Exceptions.o:
+	gcc -c $(INC)/Exceptions.c
+
+tb.o: $(INC)/kwic.h $(INC)/ShiftSort.h $(INC)/Exceptions.h tb.c
+	$(CC) -c $(CFLAGS) tb.c
 
 ShiftSort.o: $(INC)/kwic.h $(INC)/ShiftSort.h $(INC)/LineStorage.h \
 		ShiftSort.c
@@ -33,4 +49,4 @@ WordTable.o: $(INC)/kwic.h $(INC)/WordTable.h WordTable.c
 	$(CC) -c $(CFLAGS) WordTable.c
 
 clean:
-	rm -f *.o act/* driver *.gcov *.gcda *.gcno
+	rm -f *.o act/* tb *.gcov *.gcda *.gcno

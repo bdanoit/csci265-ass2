@@ -1,0 +1,88 @@
+==========================
+Documentation Type: MIS
+Last Updated: Dec 2, 2013
+Author: Mandip Sangha
+==========================
+
+ShiftSort MIS
+*****************
+
+Class Method SSInit
+-------------------
+Input:None
+Assumptions:None
+Exceptions:None
+Behaviour:	Initialize the module to have 0 lines
+Output:None
+-------------------
+
+Class Method SSReset
+--------------------
+Input:None
+Assumptions:None
+Exceptions:None
+Behaviour:	Remove all lines and words, freeing any dynamically allocated storage
+Output:None
+-------------------
+
+Class Method SSShiftSort
+------------------------
+Input:None
+Assumptions:None
+Exceptions:if not enough memory is available throw exception (enum) KWMEMORYERROR
+Behaviour: 	attempt to compute the shifted and sorted lines
+Output: On Successful completion returns (enum) KWSUCCESS
+-------------------
+
+Class Method SSGetWord
+----------------------
+Input:(Integer)lineNum, (Integer)wordNum
+Assumptions:None
+Exceptions: if lineNum is not in [0..SSNumLines()-1] and wordNum in [0..SSNumWords()-1] then throw exception (enum) KWRANGEERROR
+Behaviour:None
+Output: (char *) word wordNum from line lineNum
+-------------------
+
+Class Method SSNumWords
+-----------------------
+Input:(Integer)lineNum
+Assumptions:None
+Exceptions: if lineNum is not in [0..SSNumLines()-1] then throw exception (enum) KWRANGEERROR
+Behaviour:None
+Output:(Integer)the number of words in line lineNum
+-------------------
+
+Class Method SSGetShiftNum
+--------------------------
+Input:(Integer)lineNum
+Assumptions:None
+Exceptions: if lineNum in is not [0..SSNumLines()-1] then throw exception (enum) KWRANGEERROR
+Behaviour:None
+Output:(Integer)the number of left circular shifts that were applied to the original line to generate line lineNum
+-------------------
+
+Class Method SSNumLines
+-----------------------
+Input:None
+Assumptions:None
+Exceptions:None
+Behaviour:None
+Output:(Integer)the total number of lines currently stored
+-------------------
+
+Class Method SSPrintState NOTE: for testing use only.
+-------------------------
+Input:None
+Assumptions:None
+Exceptions:None
+Behaviour:Display the internal module state on stdout   
+Output:None
+-------------------
+
+
+
+
+
+
+
+

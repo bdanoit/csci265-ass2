@@ -1,0 +1,92 @@
+/*
+==========================
+Documentation Type: Test Implemention
+Last Updated: Dec 2, 2013
+Author: Justin Waterhouse
+==========================
+*/
+
+#include <stdio.h>
+#include "kwic.h"
+#include "LineStorage.h"
+#include "ShiftSort.h"
+
+include(../../CewDir/bin/cew.c)
+
+//LOCAL
+#define MAXWORDS 6
+
+int i,j;
+
+static struct {
+	int numWords;
+	int shiftNum;
+	char* wordList[MAXWORDS];
+}
+
+lineList[] = {
+	{1,0,"A"},
+	{1,0,"A"},
+	{2,0,"A","B"},
+	{2,0,"A","C"},
+	{2,1,"B","A"},
+	{2,1,"C","A"},
+	{4,1,"C","Programming","Language","The"},
+	{5,1,"Cat","in","the","Hat","The"},
+	{5,4,"Hat","The","Cat","in","the"},
+	{4,3,"Language","The","C","Programming"},
+	{4,2,"Programming","Language","The","C"},
+	{0} /* terminator */
+};
+
+
+int main()
+{
+	cew_Variables
+	
+	SSInit();
+	// CEW N CASES
+	cew_Ncase(,SSShiftSort(), KWSUCCESS, !=)
+	cew_Ncase(,SSNumLines(), 11, !=)
+
+	for(i = 0; i < 11; i++)
+	{
+		cew_Ncase(,SSNumWords(i), lineList[i].numWords, !=)
+		cew_Ncase(,SSGetShiftNum(i),lineList[i].shiftNum, !=)
+		
+		for(j = 0; j < lineList[i].numWords; j++)
+		{
+			cew_Ncase(,strcmp(SSGetWord(i,j),lineList[i].wordList[j]),0,!=)
+		}
+	}
+	
+	cew_Ncase(SSReset(),SSShiftSort(), KWSUCCESS, !=)
+
+   //Test Print method
+   SSPrintState();
+   
+   // CEW E CASES
+   cew_Ecase(SSGetWord(-1000,0), KWRANGEERROR)
+   cew_Ecase(SSGetWord(-1,0), KWRANGEERROR)
+   cew_Ecase(SSGetWord(12,0), KWRANGEERROR)   
+   cew_Ecase(SSGetWord(1012,0), KWRANGEERROR)
+   
+   cew_Ecase(SSNumWords(-1000), KWRANGEERROR)
+   cew_Ecase(SSNumWords(-1), KWRANGEERROR)
+   cew_Ecase(SSNumWords(12), KWRANGEERROR)
+   cew_Ecase(SSNumWords(1012), KWRANGEERROR)
+   
+   cew_Ecase(SSGetShiftNum(-1000), KWRANGEERROR)
+   cew_Ecase(SSGetShiftNum(-1), KWRANGEERROR)
+   cew_Ecase(SSGetShiftNum(12), KWRANGEERROR)
+   cew_Ecase(SSGetShiftNum(1012), KWRANGEERROR)
+   
+   cew_Ecase(SSGetWord(0,-1000), KWRANGEERROR)
+   cew_Ecase(SSGetWord(0,-1), KWRANGEERROR)
+   cew_Ecase(SSGetWord(0, lineList[0].numWords+1), KWRANGEERROR)   
+   cew_Ecase(SSGetWord(0,lineList[0].numWords+1000), KWRANGEERROR)
+   
+
+	cew_Summary
+	return 0;
+}
