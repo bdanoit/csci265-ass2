@@ -4,85 +4,45 @@ Last Updated: Dec 2, 2013
 Author: Daniel Deyaegher
 ==========================
 
-WordTable.MIS
+WordTable MIS
 *****************
-State invariant:
-   1. wordList contains numWords pointers to null-terminated C strings.
-   2. wordList strings are sorted in ascending order.
-
-
-Class Method getNextWord
---------------------------
-Inputs: fp = name of the file to read from
-
-Exceptions: traversal hits end of file fp
-
-Assumptions: fp is properly passed in
-
-Behaviour: 
-   if there is a `noise word' remaining in fp then
-      Store that word from in a static buffer and return its address.
-      Words longer than KWMAXNOISEWORD characters are truncated.
-
-Outputs: result = address to noise word
---------------------------
-
 
 Class Method WTInit
 --------------------------
-Inputs: noiseWdFileName
-
-Exceptions: noiseWdFileName is unreadable
-            file cannot open
-            cannot allocate wordList memory
-            
-            
+Input: (char*)noiseWdFileName
 Assumptions: noiseWdFileName is properly passed in
              nosieWdFileName exists
              The file specified by noiseWdFileName
                (a) contains one word per line
                (b) is sorted in strictly ascending order
-
+Exceptions: noiseWdFileName is unreadable throw (enum) KWFILEERROR
+            cannot calloc/realloc/malloc wordList memory throw (enum) KWMEMORYERROR
 Behaviour:  Words in noiseWords are loaded into main memory
             words longer than 15 characters are truncated to 15 characters
-            
-
-Outputs: KWSUCCESS = 0
+Output: (enum) KWSUCCESS
 --------------------------
-
 
 Class Method WTIsMember
 --------------------------
-Inputs: s = pointer to char array
-
+Input: (char*)s
+Assumptions: s is initialized properly
 Exceptions: s is less than wordList[mid]
             s is greater than wordList[mid]
-
-Assumptions: s is initialized properly
-
 Behaviour:  splits the wordList in half and compares s with each mid value.
                if s is less than the mid, move the upper bound and recalculate.
                if s is the same, word found and return 1.
                else, s is greater so move the lower bound up and recalculate.
             if traversal reaches the end of the list (low > high)
                return 0
-
-Outputs: 1 if word is found
-         0 if word is not found
+Output:  (integer)1 if word is found
+         (integer)0 if word is not found
 --------------------------
-
 
 Class Method WTPrintState
 --------------------------
-Inputs: None
-
-Exceptions: None
-
+Input: None
 Assumptions: wordList is initialized
-
+Exceptions: None
 Behaviour: Print contents of wordList to screen.
-
-Outputs: None
+Output: None
 --------------------------
-
-tablength: 3 spaces
