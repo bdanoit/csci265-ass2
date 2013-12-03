@@ -31,7 +31,7 @@ user to check whether a given word is in this list.
 KWStatus WTInit(char *noiseWdFileName);
 
 /*
-* Return true if s is one of the words stored and false otherwise,
+* Return 1 if s is one of the words stored and false otherwise,
 * ignoring case.
 */
 int WTIsMember(char* s);
