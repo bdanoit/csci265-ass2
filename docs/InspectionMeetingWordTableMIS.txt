@@ -15,17 +15,11 @@ Daniel Deyaegher - Author of inspected material
 Mandip Sangha
 Baleze Danoit
 
-
 Is this a follow-up meeting: NO
-
 Requires follow-up meeting: NO
-
 Number of Requested Changes: 3
-
 Number of Suggested Changes: 0
-
 Number of Verified Changes: 0
-
 Additional Comments: Change general format to match the other MIS
 
 
@@ -36,45 +30,29 @@ REQUESTED CHANGES
 Requested Change 1
 ------------------
 Line Number: N/A
-
 Requested Change: Remove state invariant declaration
-
 Reason for Change: unnecessary
-
 Suggested By: Mandip
-
 Approved By: Daniel
-
 To be Changed By: Daniel
 ------------------
 
 Requested Change 2
 ------------------
 Line Number: N/A
-
 Requested Change: Add input data type in MIS
-
 Reason for Change: less ambiguity
-
 Suggested By: Mandip
-
 Approved By: John
-
 To be Changed By: Daniel
 ------------------
-
 
 Requested Change 3
 ------------------
 Line Number: N/A
-
 Requested Change: Remove local methods from MIS
-
 Reason for Change: not needed
-
 Suggested By: Mandip
-
 Approved By: John
-
 To be Changed By: Daniel
 
