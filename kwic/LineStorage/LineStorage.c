@@ -5,31 +5,32 @@
 #include <string.h>
 #include "kwic.h"
 #include "LineStorage.h"
+#include "Exceptions.h"
 
 /***** local constants *****/
+#define DefaultLineCapacity 8
+#define DefaultWordCapacity 10
 
 /***** local types *****/
-
-/*Each line is a list of WordNodes.*/
-typedef struct WordNode {
-	char* word;
-	struct WordNode* nextWordPtr;
-} WordNode;
-typedef WordNode* WordNodePtr;
-
 /*The LineStorage module stores a list of LineNodes*/
 typedef struct LineNode {
-	struct LineNode* nextLinePtr;
-	WordNodePtr headWordPtr;
-	WordNodePtr tailWordPtr;
-	int wordCount;
+    int capacity;
+	int count;
+    char** words;
 } LineNode;
 typedef LineNode* LineNodePtr;
 
+typedef struct LineStorage{
+    int capacity;
+    int count;
+    LineNode** lines;
+} LineStorage;
+
 /***** local variables *****/
 
-static LineNodePtr headLinePtr, tailLinePtr;
-static int lineCount;
+static LineStorage* LS;
+//static LineNodePtr headLinePtr, tailLinePtr;
+//static int lineCount;
 
 /***** state invariant *****
 
@@ -67,170 +68,171 @@ static int lineCount;
 */
 static LineNodePtr getLine(int i)
 {
-	LineNodePtr tmpLinePtr;
-
-	if (i < 0)
-		return NULL;
-	for (tmpLinePtr = headLinePtr;
-			i-- > 0 && tmpLinePtr != NULL;
-			tmpLinePtr = tmpLinePtr->nextLinePtr)
-		;
-	return tmpLinePtr;
-}
-
-/*
-* if wordNodePtr != NULL && the list headed by wordNodePtr has >= i words then
-*	return a pointer to the ith word in the list headed by wordNodePtr
-* else
-*	return NULL
-* Assumed: wordNodePtr is either NULL or a pointer to a list of WordNodes
-*/
-static WordNodePtr getWord(WordNodePtr wordNodePtr,int i)
-{
-	if (i < 0)
-		return NULL;
-	while (i-- > 0 && wordNodePtr != NULL) {
-		wordNodePtr = wordNodePtr->nextWordPtr;
-	}
-	return wordNodePtr;
+    if(LS == NULL){
+        return NULL;
+    }
+    
+    if(i < 0 || i >= LS->count){
+        return NULL;
+    }
+    
+    return LS->lines[i];
 }
 
 /***** exported functions *****/
 
 void LSInit(void)
 {
-	headLinePtr = NULL;
-	tailLinePtr = NULL;
-	lineCount = 0;
+    LS = calloc(1, sizeof(LineStorage));
+    if(LS == NULL){
+        THROW(KWMEMORYERROR);
+    }
+    LS->capacity = DefaultLineCapacity;
+    LS->count = 0;
+    LS->lines = (LineNode**)calloc(LS->capacity, sizeof(LineNode*));
+    if(LS->lines == NULL){
+        THROW(KWMEMORYERROR);
+    }
 }
 
 void LSReset(void)
 {
-	LineNodePtr tmpLinePtr;
-	WordNodePtr tmpWordPtr0,tmpWordPtr1;
-
-	while (headLinePtr != NULL) {
-		tmpWordPtr0 = headLinePtr->headWordPtr;
-		while (tmpWordPtr0 != NULL) {
-			tmpWordPtr1 = tmpWordPtr0->nextWordPtr;
-			free(tmpWordPtr0->word);
-			free(tmpWordPtr0);
-			tmpWordPtr0 = tmpWordPtr1;
-		}
-		tmpLinePtr = headLinePtr;
-		headLinePtr = headLinePtr->nextLinePtr;
-		free(tmpLinePtr);
-	}
-	lineCount = 0;
-	tailLinePtr = NULL;
+    int i, k;
+	for (i = 0; i < LS->count; i++) {
+        LineNode* LN = LS->lines[i];
+        for(k = 0; k < LN->count; k++){
+            free(LN->words[k]);
+        }
+        free(LN->words);
+        free(LS->lines[i]);
+    }
+    free(LS->lines);
+    
+    /* RE-INITIALIZE */
+    LS->capacity = DefaultLineCapacity;
+    LS->count = 0;
+    LS->lines = (LineNode**)calloc(LS->capacity, sizeof(LineNode*));
+    if(LS->lines == NULL){
+        THROW(KWMEMORYERROR);
+    }
 }
 
 KWStatus LSAddLine(void)
 {
-	LineNodePtr newLinePtr;
-
-	/* create and fill a LineNode */
-	newLinePtr = malloc(sizeof(LineNode));
-	if (newLinePtr == NULL)
-		return KWMEMORYERROR;
-	lineCount++;
-	newLinePtr->nextLinePtr = NULL;
-	newLinePtr->headWordPtr = NULL;
-	newLinePtr->tailWordPtr = NULL;
-	newLinePtr->wordCount = 0;
-
-	/* link in the new LineNode */
-	if (tailLinePtr == NULL) {
-		headLinePtr = newLinePtr;
-	} else {
-		tailLinePtr->nextLinePtr = newLinePtr;
-	}
-	tailLinePtr = newLinePtr;
+    if(LS == NULL){
+		THROW(KWRANGEERROR);
+    }
+    /* INITIATE LineNode */
+    LineNode* newLine;
+    newLine = calloc(1, sizeof(LineNode));
+    if(newLine == NULL){
+        //LineNode CALLOC FAILED
+		THROW(KWMEMORYERROR);
+    }
+    newLine->capacity = DefaultWordCapacity;
+    newLine->count = 0;
+    newLine->words = (char**)calloc(newLine->capacity, sizeof(char*));
+    if(newLine->words == NULL){
+        THROW(KWMEMORYERROR);
+    }
+    
+	/* REALLOCATE IF SIZE GREATER THAN CAPACITY */
+    if(LS->capacity == LS->count){
+        LS->capacity*= 2;
+	    LineNode** tmp;
+        tmp = (LineNode**)realloc(LS->lines, LS->capacity * sizeof(LineNode*));
+        if(tmp == NULL){
+            //LineStorage REALLOC FAILED
+            return KWMEMORYERROR;
+        }
+        LS->lines = tmp;
+    }
+    LS->lines[LS->count] = newLine;
+    LS->count++;
 	return KWSUCCESS;
 }
 
 KWStatus LSAddWord(char* word)
 {
-	WordNodePtr newWordPtr;
-
-	if (tailLinePtr == NULL)
-		return KWRANGEERROR;
-
-	/* create and fill a WordNode */
-	newWordPtr = malloc(sizeof(WordNode));
-	if (newWordPtr == NULL)
-		return KWMEMORYERROR;
-	newWordPtr->word = malloc(strlen(word)+1);
-	if (newWordPtr->word == NULL) {
-		free(newWordPtr);
-		return KWMEMORYERROR;
-	}
-	tailLinePtr->wordCount++;
-	strcpy(newWordPtr->word,word);
-	newWordPtr->nextWordPtr = NULL;
-
-	/* link in the new WordNode */
-	if (tailLinePtr->tailWordPtr == NULL) { /* empty line */
-		tailLinePtr->headWordPtr = newWordPtr;
-	} else {
-		tailLinePtr->tailWordPtr->nextWordPtr = newWordPtr;
-	}
-	tailLinePtr->tailWordPtr = newWordPtr;
+    
+    if(LS->count == 0){
+        THROW(KWRANGEERROR);
+    }
+    
+    /* GET CURRENT LineNode */
+    LineNode* LN = LS->lines[LS->count-1];
+    
+	/* REALLOCATE IF SIZE GREATER THAN CAPACITY */
+    if(LN->capacity == LN->count){
+        LN->capacity*= 2;
+	    char** tmp;
+        tmp = (char**)realloc(LN->words, LN->capacity * sizeof(char*));
+        if(tmp == NULL){
+            //LineNode REALLOC FAILED
+            THROW(KWMEMORYERROR);
+        }
+        LN->words = tmp;
+    }
+    
+    /* WORD NODE FOR STORING WORD */
+    char* WN = malloc(strlen(word)+1);
+    if(WN == NULL){
+        //WordNode MALLOC FAILED
+        THROW(KWMEMORYERROR);
+    }
+    strcpy(WN, word);
+    LN->words[LN->count] = WN;
+    LN->count++;
 	return KWSUCCESS;
 }
 
 const char* LSGetWord(int lineNum,int wordNum)
 {
-	LineNodePtr tmpLinePtr;
-	WordNodePtr tmpWordPtr;
-
-	if (lineNum >= lineCount)
-		return NULL;
+	LineNodePtr LN;
+    char* word;
 
 	/* find line LineNum */
-	tmpLinePtr = getLine(lineNum);
-	if (tmpLinePtr == NULL)
+	LN = getLine(lineNum);
+	if (LN == NULL)
 		return NULL;
 
 	/* find word wordNum */
-	tmpWordPtr = getWord(tmpLinePtr->headWordPtr,wordNum);
-	if (tmpWordPtr == NULL)
+	if (wordNum < 0 || wordNum >= LN->count)
 		return NULL;
-	return tmpWordPtr->word;
+        
+	return LN->words[wordNum];
 }
 
 int LSNumWords(int lineNum)
 {
-	LineNodePtr tmpLinePtr;
+	LineNodePtr LN;
 
 	/* find line lineNum */
-	tmpLinePtr = getLine(lineNum);
-	if (tmpLinePtr == NULL) {
-		return KWRANGEERROR;
+	LN = getLine(lineNum);
+	if (LN == NULL) {
+		THROW(KWRANGEERROR);
 	}
 	/* count the words in line lineNum */
-	return tmpLinePtr->wordCount;
+	return LN->count;
 }
 
 int LSNumLines(void)
 {
-	return lineCount;
+    if(LS == NULL){
+		return NULL;
+    }
+	return LS->count;
 }
 
 void LSPrintState(void)
 {
-	LineNodePtr tmpLinePtr;
-	WordNodePtr tmpWordPtr;
-
-	printf("lineCount:%d\n",lineCount);
-	for (tmpLinePtr = headLinePtr;
-			tmpLinePtr != NULL;
-			tmpLinePtr = tmpLinePtr->nextLinePtr) {
-		printf("\twordCount:%d\n\t",tmpLinePtr->wordCount);
-		for (tmpWordPtr = tmpLinePtr->headWordPtr;
-				tmpWordPtr != NULL;
-				tmpWordPtr = tmpWordPtr->nextWordPtr) {
-			printf("!%s",tmpWordPtr->word);
+	printf("lineCount:%d\n",LS->count);
+    int i, k;
+	for (i = 0; i < LS->count; i++) {
+        LineNode* LN = LS->lines[i];
+		printf("\twordCount:%d\n\t",LN->count);
+        for(k = 0; k < LN->count; k++){
+			printf("!%s",LN->words[k]);
 		}
 		printf("!\n");
 	}
