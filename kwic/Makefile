@@ -98,6 +98,11 @@ runtest: kwic
 	)
 	-diff actualOutput/noiseWords2 expectedOutput/noiseWords2
 
+gprof: kwic
+	$(CC) -o ./kwic $(CFLAGS) main.o $(IMPOBJ)
+	./kwic bigFile > /dev/null
+	gprof kwic > gprof.out
+
 main.o: $(INC)/kwic.h $(IMPINC)
 	$(CC) -c $(CFLAGS) main.c
 
