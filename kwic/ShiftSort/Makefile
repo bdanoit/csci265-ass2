@@ -9,9 +9,11 @@ INDENT=cat
 
 CC = gcc $(XCFLAGS)
 
+runtest: tb.cew
+	./tb.cew
 
-bats: tb.o ShiftSort.o LineStorage.o WordTable.o Exceptions.o
-	$(CC) -o tb tb.o ShiftSort.o LineStorage.o WordTable.o Exceptions.o
+tb.cew: tb.o ShiftSort.o LineStorage.o WordTable.o Exceptions.o
+	$(CC) -o tb.cew tb.o ShiftSort.o LineStorage.o WordTable.o Exceptions.o
 
 tb.c :  tb.cew
 	rm -f $(SD)/tmp/tb.num
@@ -19,9 +21,6 @@ tb.c :  tb.cew
 	awk -f $(SD)/bin/addLineNums.awk tb.cew > $(SD)/tmp/tb.num
 	m4 -B20000 $(SD)/tmp/tb.num | $(INDENT) > tb.c
 
-
-runtest: tb
-	./tb
 
 gcov: tb.o ShiftSort.o LineStorage.o WordTable.o Exceptions.o
 	$(CC) -fprofile-arcs -ftest-coverage -c ShiftSort.c

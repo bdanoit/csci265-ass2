@@ -12,19 +12,18 @@ INDENT=cat
 
 CC = gcc $(XCFLAGS)
 
+runtest: tb.cew
+	./tb.cew
 
-bats: tb.o WordTable.o Exceptions.o
-	$(CC) -o tb tb.o WordTable.o Exceptions.o
+tb.cew: tb.o WordTable.o Exceptions.o
+	$(CC) -o tb.cew tb.o WordTable.o Exceptions.o
 
-tb.c :  tb.cew
+tb.c :  
 	rm -f $(SD)/tmp/tb.num
 	rm -f ./tb.c
 	awk -f $(SD)/bin/addLineNums.awk tb.cew > $(SD)/tmp/tb.num
 	m4 -B20000 $(SD)/tmp/tb.num | $(INDENT) > tb.c
 
-
-runtest: tb
-	./tb
 
 gcov: tb.o WordTable.o Exceptions.o
 	$(CC) -fprofile-arcs -ftest-coverage -c WordTable.c
