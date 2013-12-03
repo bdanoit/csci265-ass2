@@ -7,7 +7,6 @@
 #include "kwic.h"
 #include "Input.h"
 #include "LineStorage.h"
-#include "Exceptions.h"
 
 /***** local constants *****/
 
@@ -27,6 +26,7 @@ KWStatus INLoad( char *filename )
 {
 	char w[KWMAXWORDLENGTH+1];
 	int c,length,newLine;
+	KWStatus returnCode;
 	FILE *inputFile;
 
 	/* determine the input source */
@@ -35,7 +35,7 @@ KWStatus INLoad( char *filename )
 	else {
 		inputFile = fopen(filename, "r");
 		if (inputFile == NULL)
-			THROW (KWFILEERROR);
+			return KWFILEERROR;
 	}
 
 	c = '\n';
@@ -53,7 +53,9 @@ KWStatus INLoad( char *filename )
 
 		/* process a new line if required */
 		if (newLine) {
-			LSAddLine();
+			returnCode = LSAddLine();
+			if (returnCode != KWSUCCESS)
+				return returnCode;
 		}
 
 		/* read one word */
@@ -64,7 +66,9 @@ KWStatus INLoad( char *filename )
 			c = fgetc(inputFile);
 		} while(!isspace(c) && c != EOF);
 		w[length] = '\0';
-		LSAddWord(w);
+		returnCode = LSAddWord(w);
+		if (returnCode != KWSUCCESS)
+			return returnCode;
 	}
 	if (inputFile != stdin)
 		fclose(inputFile);

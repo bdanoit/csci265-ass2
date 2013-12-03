@@ -45,9 +45,9 @@ IMPINC = $(INC)/Input.h $(INC)/LineStorage.h \
 
 IMPOBJ = Input/Input.o LineStorage/LineStorage.o \
 	ShiftSort/ShiftSort.o Output/Output.o \
-	WordTable/WordTable.o
+	WordTable/WordTable.o include/Exceptions.o
 
-kwic: main.o impMod
+kwic: main.o impMod exceptions
 	$(CC) -o ./kwic $(CFLAGS) main.o $(IMPOBJ)
 
 impMod:
@@ -55,6 +55,10 @@ impMod:
 		( cd $$m; echo $$m; \
 		make 'CFLAGS=$(CFLAGS)' $(MFLAGS) export ) \
 	done
+
+exceptions:
+	(cd $(INC); echo $(INC); \
+	$(CC) -c $(CFLAGS) Exceptions.c)
 
 gdb:	kwic
 	gdb -d ShiftSort -d WordTable -d Input -d Output \
