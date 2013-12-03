@@ -155,7 +155,7 @@ KWStatus LSAddLine(void)
 KWStatus LSAddWord(char* word)
 {
     
-    if(LS->count == 0){
+    if(LS == NULL || LS->count == 0){
         THROW(KWRANGEERROR);
     }
     
