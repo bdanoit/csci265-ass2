@@ -4,10 +4,10 @@
 #include "kwic.h"
 #include "LineStorage.h"
 
-include(CewDir/bin/cew.c)
+include(../../CewDir/bin/cew.c)
 
 #define NUMLINES 348
-#define MAXWORDS 11
+#define MAXWORDS 12
 /*{5,"The","Cat","in","the","Hat"},
 	{4,"The","C","Programming","Language"},
 	{0},
@@ -70,7 +70,7 @@ struct {
 {10,"Mauris","non","massa","in","mi","rutrum","posuere","sit","amet","a","purus."},
 {6,"Proin","vehicula","tortor","et","risus","dignissim","sodales."},
 {8,"Suspendisse","eget","erat","convallis,","hendrerit","justo","tempus,","facilisis","orci."},
-{10,"Nam","sit","amet","sem","vel","est","viverra","dignissim","in","eu","nulla."},
+{11,"Nam","sit","amet","sem","vel","est","viverra","dignissim","in","eu","nutella","nulla."},
 {9,"Etiam","ac","magna","nec","mi","tristique","ullamcorper","in","nec","lorem."},
 {6,"Curabitur","rhoncus","nisl","in","mi","placerat","laoreet."},
 {6,"Cras","venenatis","tellus","at","odio","porta","viverra."},
@@ -370,119 +370,41 @@ struct {
 
 static int errorCount = 0;
 
-static void runTest()
+int main()
 {
-	int i,j,status;
+    int i,k,j,status;
 	int rangeErr[4];
 	const char* word;
 	
 	cew_Variables
-
-	//printf("check that LSAddWord properly signals KWRANGEERROR\n");
 	
-	//cew_Ecase(LSAddWord(""),KWRANGEERROR);
+	//Exception Cases
+	cew_Ecase(LSInit();LSAddWord(""),KWRANGEERROR) //Add word without existing line
+	cew_Ecase(LSNumWords(4), KWRANGEERROR) //Get num words from a line that doesn't exist
+	
+	//Normal Behaviour
+	cew_Ncase(,LSAddLine(),KWSUCCESS,!=) //Add Line
+	cew_Ncase(,LSNumLines(),1,!=) //Make sure LSNumLines is 1
+	cew_Ncase(,LSAddWord("Hello"),KWSUCCESS,!=) //Add 'Hello' to first line
+	cew_Ncase(LSAddWord("World"),LSNumWords(0),2,!=) //Add 'World' to first line, count number of words
+	cew_Ncase(word = LSGetWord(0,0),strcmp(word,"Hello"),0,!=) //Make sure first word is Hello
+	cew_Ncase(,LSGetWord(2,0),0,!=) //Try to get a word from a line that doesn't exist
+	cew_Ncase(,LSGetWord(0,2),0,!=) //Try to get a word that doesn't exist
+	cew_Ncase(LSAddLine();LSAddWord("Wut"),LSNumLines(),2,!=) //Make sure LSNumLines is 2
+	cew_Ncase(LSReset(),0,0,!=) //Reset LineStorage
+	
+	//Stress Test
+	for(i = 0; i < 1000; i++){
+	    for(k = 0; k < NUMLINES; k++){
+	        cew_Ncase(,LSAddLine(),KWSUCCESS,!=)
+	        for(j = 0; j < lineList[k].numWords; j++){
+	            cew_Ncase(,LSAddWord(lineList[k].wordList[j]),KWSUCCESS,!=)
+	        }
+	    }
+	}
+	
 	
 	cew_Summary
 	
-    /*
-	printf("load lineList into LineStorage\n");
-	for (i = 0; i < NUMLINES; i++) {
-		printf("\tline %d\n",i);
-		status = LSAddLine();
-		if (status != KWSUCCESS) {
-			printf("Error in LSAddLine return value.");
-			printf(" Actual: %d Expected: %d\n",status,KWSUCCESS);
-			errorCount++;
-		}
-		for (j = 0; j < lineList[i].numWords; j++) {
-			printf("\t\tword %d\n",j);
-			status = LSAddWord(lineList[i].wordList[j]);
-			if (status != KWSUCCESS) {
-				printf("Error in LSAddWord return value.");
-				printf(" Actual: %d Expected: %d\n",
-					status,KWSUCCESS);
-				errorCount++;
-			}
-		}
-	}
-
-	printf("check that the lines have been properly stored\n");
-	if (LSNumLines() != NUMLINES) {
-		printf("Error in LSNumLines. Actual: %d Expected: %d\n",
-			LSNumLines(),NUMLINES);
-		errorCount++;
-	}
-	for (i = 0; i < NUMLINES; i++) {
-		printf("\tline %d\n",i);
-		if (LSNumWords(i) != lineList[i].numWords) {
-			printf("Error in LSNumWord. Actual: %d Expected: %d\n",
-				LSNumWords(i),lineList[i].numWords);
-			errorCount++;
-		}
-		for (j = 0; j < lineList[i].numWords; j++) {
-			printf("\t\tword %d\n",j);
-			if (strcmp(LSGetWord(i,j),lineList[i].wordList[j])) {
-				printf("Error in LSGetWords(%d,%d).",i,j);
-				printf(" Actual: !%s! Expected: !%s!\n",
-					LSGetWord(i,j),lineList[i].wordList[j]);
-				errorCount++;
-			}
-		}
-	}
-
-	printf("check that line number range errors are properly signaled\n");
-	rangeErr[0] = -1000;
-	rangeErr[1] = -1;
-	rangeErr[2] = NUMLINES;
-	rangeErr[3] = NUMLINES+1000;
-	for (i = 0; i < 4; i++) {
-		printf("\tline %d\n",rangeErr[i]);
-		status = LSNumWords(rangeErr[i]);
-		if (status != KWRANGEERROR) {
-			printf("Error in LSNumWords return value.");
-			printf(" Actual: %d Expected: %d\n",
-				status,KWRANGEERROR);
-			errorCount++;
-		}
-		word = LSGetWord(rangeErr[i],0);
-		if (word != 0) {
-			printf("Error in LSGetWord return value.");
-			printf(" Actual: !%s! Expected: %d\n",word,0);
-			errorCount++;
-		}
-	}
-
-	printf("check that word number range errors are properly signaled\n");
-	rangeErr[0] = -1000;
-	rangeErr[1] = -1;
-	rangeErr[2] = lineList[0].numWords;
-	rangeErr[3] = lineList[0].numWords+1000;
-	for (i = 0; i < 4; i++) {
-		printf("\tword %d\n",rangeErr[i]);
-		word = LSGetWord(0,rangeErr[i]);
-		if (word != 0) {
-			printf("Error in LSGetWord return value.");
-			printf(" Actual: !%s! Expected: %d\n",word,0);
-			errorCount++;
-		}
-	}
-	*/
-}
-
-int main()
-{
-	LSInit();
-    
-    int i;
-    for(i = 0; i < 100; i++){
-	    printf("run the tests once\n");
-	    runTest();
-
-	    printf("check that LSReset runs without crashing\n");
-	    LSReset();
-	}
-
-	if (errorCount == 0)
-		printf("\n\nNo errors detected!\n");
-	return errorCount;
+	return 0;
 }

@@ -1,0 +1,29 @@
+============================
+Documentation Type: Testplan
+Last Updated: Dec 2, 2013
+Author: Baleze Danoit
+============================
+
+LineStorage TestPlan
+
+
+Exceptional Case Testing
+++++++++++++++++++++++++
+1. LSAddWord before a line exist
+2. LSNumWords for a line that doesn't exist
+
+Normal Behaviour Testing
+++++++++++++++++++++++++
+3. LSAddLine returns KWSUCCESS
+4. Make sure LSNumLines is 1
+5. LSAddWord 'Hello' returns KWSUCCESS
+6. LSAddWord 'World', LSNumWords returns 2
+7. LSGetWord first word should be 'Hello'
+8. LSGetWord from line that doesnt exist
+9. LSGetWord from line that exists, but word that doesn't
+10. LSAddLine and LSAddWord, make sure LSNumLines is 2
+11. Reset LineStorage
+
+Stress Testing
+++++++++++++++
+Add 100 iterations of a multi-dimensional array containing 348 lines with variable word length

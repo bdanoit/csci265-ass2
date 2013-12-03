@@ -119,9 +119,8 @@ void LSReset(void)
 
 KWStatus LSAddLine(void)
 {
-    
     if(LS == NULL){
-        LSInit();
+		THROW(KWRANGEERROR);
     }
     /* INITIATE LineNode */
     LineNode* newLine;
@@ -192,9 +191,6 @@ const char* LSGetWord(int lineNum,int wordNum)
 	LineNodePtr LN;
     char* word;
 
-	if (lineNum >= LS->count)
-		return NULL;
-
 	/* find line LineNum */
 	LN = getLine(lineNum);
 	if (LN == NULL)
@@ -222,6 +218,9 @@ int LSNumWords(int lineNum)
 
 int LSNumLines(void)
 {
+    if(LS == NULL){
+		return NULL;
+    }
 	return LS->count;
 }
 
