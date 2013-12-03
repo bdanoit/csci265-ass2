@@ -1,4 +1,3 @@
-
 ==========================
 Documentation Type: <TYPE>
 Last Updated: <DATE>
@@ -10,29 +9,18 @@ Author: <YOUR NAME>
 
 Class Method <METHOD NAME>
 --------------------------
-Inputs: <INPUT VARIABLES>
-
+Input: <INPUT VARIABLES>
 Exceptions: <LIST OF EXCEPTIONS>
-
 Assumptions: <LIST OF ASSUMPTIONS>
-
 Behaviour: <SHORT DESCRIPTION OF NORMAL BEHAVIOUR>
-
-Outputs: <OUTPUT>
+Output: <OUTPUT>
 --------------------------
 
-
-Class Method "METHOD NAME"
+Class Method <METHOD NAME>
 --------------------------
-Inputs: <INPUT VARIABLES>
-
+Input: <INPUT VARIABLES>
 Exceptions: <LIST OF EXCEPTIONS>
-
 Assumptions: <LIST OF ASSUMPTIONS>
-
 Behaviour: <SHORT DESCRIPTION OF NORMAL BEHAVIOUR>
-
-Outputs: <OUTPUT>
+Output: <OUTPUT>
 --------------------------
-
-tablength: 3 spaces
