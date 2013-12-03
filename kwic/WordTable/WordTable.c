@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "kwic.h"
+#include "Exceptions.h"
 #include "WordTable.h"
 
 /***** local constants *****/
@@ -33,7 +34,6 @@ static char** wordList;
 static char *getNextWord(FILE *fp)
 {
 	static char result[KWMAXNOISEWORD+1];
-	char *cp;
 	int c,len;
 
 	/* skip leading white space characters */
@@ -68,7 +68,7 @@ void WTInit(char *noiseWdFileName)
 {
 #define DFLTNUMNOISEWORDS	100
 	FILE *fp;
-	int retCode,arrayLength;
+	int arrayLength;
 	char *newWord;
 
 	fp = fopen(noiseWdFileName,"r");	
@@ -85,7 +85,6 @@ void WTInit(char *noiseWdFileName)
 		THROW(KWMEMORYERROR);
 	}
 
-	retCode = KWSUCCESS;
 	for( ; ; ) {
 		newWord = getNextWord(fp);
 		if (newWord == NULL) break;
@@ -95,18 +94,19 @@ void WTInit(char *noiseWdFileName)
 					arrayLength*sizeof(char*));
 			if (wordList == NULL) {
 				fclose(fp);
-			   THROW(KWMEMORYERROR);
+                                THROW(KWMEMORYERROR);
 			}
 		}
 		wordList[numWords] = malloc(strlen(newWord)+1);
 		if (wordList[numWords] == NULL) {
-   		fclose(fp);
+			fclose(fp);
 			THROW(KWMEMORYERROR);
 		}
 		strcpy(wordList[numWords],newWord);
 		numWords++;
 	}
 	fclose(fp);
+	return KWSUCCESS;
 #undef DFLTNUMNOISEWORDS
 }
 

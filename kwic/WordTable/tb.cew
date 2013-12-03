@@ -1,0 +1,75 @@
+/*
+==========================
+Documentation Type: Test Implemention
+Last Updated: Dec 2, 2013
+Author: Justin Waterhouse
+==========================
+*/
+
+
+#include "kwic.h"
+#include "WordTable.h"
+#include <string.h>
+#include <stdlib.h>
+
+include(../../CewDir/bin/cew.c)
+// LOCAL VARIABLES
+char* inWordList[] = {
+	"a", "an", "and", "and/or", 
+	"as", "at", "for", "from", "in",
+	"of", "on", "or", "the", "to", "with",
+
+	/* upper case variations: */
+	"And", "aNd", "anD",
+	/*trailing crap*/
+
+	0 /* terminator */
+};
+
+char* notInWordList[] = {
+	/* words containing words in inWordList */
+	"thereupon", "into", "stool",
+
+	/* special strings */
+        "", " ", ",",
+
+	0 /* terminator */
+};
+
+
+
+int main()
+{
+ cew_Variables
+   int i;
+   
+   // Only used during testing
+   WTPrintState();
+   
+	WTInit("testNoiseWords");
+	
+	// CEW N CASES
+	for (i = 0; inWordList[i]; i++) {
+	   // Check if words are in list
+	   cew_Ncase(,WTIsMember(inWordList[i]), 1, !=)
+   }
+   
+   for (i = 0; notInWordList[i]; i++ )
+   {
+      // Look for words not in the list
+	   cew_Ncase(,WTIsMember(notInWordList[i]), 0, !=)
+   }
+
+
+   cew_Ecase(WTInit("NotAFile"), KWFILEERROR)
+
+   cew_Ecase(WTInit("NotAFile"), KWFILEERROR)
+
+   cew_Ecase(WTInit("NotAFile"), KWFILEERROR)   
+
+   cew_Ecase(WTInit("NotAFile"), KWFILEERROR)
+
+
+	cew_Summary
+	return 0;
+}

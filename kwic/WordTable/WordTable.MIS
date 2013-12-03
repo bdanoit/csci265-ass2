@@ -1,0 +1,48 @@
+==========================
+Documentation Type: MIS
+Last Updated: Dec 2, 2013
+Author: Daniel Deyaegher
+==========================
+
+WordTable MIS
+*****************
+
+Class Method WTInit
+--------------------------
+Input: (char*)noiseWdFileName
+Assumptions: noiseWdFileName is properly passed in
+             nosieWdFileName exists
+             The file specified by noiseWdFileName
+               (a) contains one word per line
+               (b) is sorted in strictly ascending order
+Exceptions: noiseWdFileName is unreadable throw (enum) KWFILEERROR
+            cannot calloc/realloc/malloc wordList memory throw (enum) KWMEMORYERROR
+Behaviour:  Words in noiseWords are loaded into main memory
+            words longer than 15 characters are truncated to 15 characters
+Output: (enum) KWSUCCESS
+--------------------------
+
+Class Method WTIsMember
+--------------------------
+Input: (char*)s
+Assumptions: s is initialized properly
+Exceptions: s is less than wordList[mid]
+            s is greater than wordList[mid]
+Behaviour:  splits the wordList in half and compares s with each mid value.
+               if s is less than the mid, move the upper bound and recalculate.
+               if s is the same, word found and return 1.
+               else, s is greater so move the lower bound up and recalculate.
+            if traversal reaches the end of the list (low > high)
+               return 0
+Output:  (integer)1 if word is found
+         (integer)0 if word is not found
+--------------------------
+
+Class Method WTPrintState
+--------------------------
+Input: None
+Assumptions: wordList is initialized
+Exceptions: None
+Behaviour: Print contents of wordList to screen.
+Output: None
+--------------------------
