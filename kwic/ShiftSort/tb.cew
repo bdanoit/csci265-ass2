@@ -11,7 +11,7 @@ Author: Justin Waterhouse
 #include "LineStorage.h"
 #include "ShiftSort.h"
 
-include(CewDir/bin/cew.c)
+include(../../CewDir/bin/cew.c)
 
 //LOCAL
 #define MAXWORDS 6

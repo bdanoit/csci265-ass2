@@ -2,7 +2,8 @@ INC = ../include
 
 XCFLAGS = -I$(INC) ## extra C flags
 
-SD=CewDir
+SD=../../CewDir
+
 
 INDENT=cat
 
@@ -32,9 +33,9 @@ gcov: tb.o ShiftSort.o LineStorage.o WordTable.o Exceptions.o
 export: ShiftSort.o
 
 Exceptions.o:
-	gcc -c Exceptions.c
+	gcc -c $(INC)/Exceptions.c
 
-tb.o: $(INC)/kwic.h $(INC)/ShiftSort.h Exceptions.h tb.c
+tb.o: $(INC)/kwic.h $(INC)/ShiftSort.h $(INC)/Exceptions.h tb.c
 	$(CC) -c $(CFLAGS) tb.c
 
 ShiftSort.o: $(INC)/kwic.h $(INC)/ShiftSort.h $(INC)/LineStorage.h \
