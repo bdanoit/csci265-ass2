@@ -219,7 +219,7 @@ int LSNumWords(int lineNum)
 int LSNumLines(void)
 {
     if(LS == NULL){
-		return NULL;
+		return 0;
     }
 	return LS->count;
 }
