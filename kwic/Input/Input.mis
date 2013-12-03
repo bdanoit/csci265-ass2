@@ -10,28 +10,20 @@ Input.c MIS
 
 Class Method INInit
 --------------------------
-Inputs: none
-
-Exceptions: none
-
-Assumptions: none
-
-Behaviour: Initialize the module
-
-Outputs: none
+Input:None
+Assumptions:None
+Exceptions:None
+Behaviour:Initialize the module
+Output:None
 --------------------------
 
 
 Class Method INLoad
 --------------------------
-Inputs: none
-
-Exceptions: - If the file named by filename cannot be opened for input then throw KWFILEERROR
-
+Input:None
 Assumptions: LSInit has been called
-
+Exceptions: - If the file named by filename cannot be opened for input then throw KWFILEERROR
 Behaviour: Attempt to load the lines into the LineStorage module. The lines are read from stdin if filename is NULL,
            otherwise the lines are read from the file whose name is specified by filename
-
-Outputs: return KWSUCCESS if no exception was thrown
+Output: Return KWSUCCESS if no exception was thrown
 --------------------------

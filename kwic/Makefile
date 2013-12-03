@@ -102,7 +102,11 @@ runtest: kwic
 	)
 	-diff actualOutput/noiseWords2 expectedOutput/noiseWords2
 
-gprof: kwic
+gprof: 
+	make clean
+	make 'CFLAGS=-pg' profileKwic > /dev/null
+
+profileKwic: kwic
 	$(CC) -o ./kwic $(CFLAGS) main.o $(IMPOBJ)
 	./kwic bigFile > /dev/null
 	gprof kwic > gprof.out
