@@ -1,0 +1,78 @@
+=============================================
+Documentation Type: Inspection Meeting Report
+Last Updated: November 29, 2013
+Author: John Tribe
+=============================================
+
+
+Inspection Meeting Report
+*************************
+
+File Name:Output.c
+
+Attendance:
+John Tribe - Author of inspected material
+Carsten Wurm
+Mandip Sangha
+
+Is this a follow-up meeting: NO
+
+Requires follow-up meeting: NO
+
+Number of Requested Changes: 2
+
+Number of Suggested Changes: 1
+
+Number of Verified Changes: 0
+
+
+
+
+=================
+REQUESTED CHANGES
+=================
+
+Requested Change 1
+------------------
+Line Number: 52, 58
+
+Reason for Change: Add {} to show the for loop is empty
+
+Suggested By: Carsten
+
+Approved By: Mandip
+
+To be Changed By: John
+
+
+Requested Change 2
+------------------
+Line Number: 53
+
+Reason for Change: No need to for +=
+
+Suggested By: John
+
+Approved By: Mandip
+
+To be Changed By: John
+
+
+
+=================
+SUGGESTED CHANGES
+=================
+
+Suggested Change 1
+------------------
+Line Number: N/A
+
+Reason for Suggestion: Switch to Cew testing to follow the standard
+
+Reason for No Change: Output is unique from other modules and requires
+a different style of testing to verify correct format of printing to stdout
+
+Suggested By: Mandip
+
+
+
